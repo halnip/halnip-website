@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HALNIP株式会社 | Bridging Cultures Beyond Borders</title>
+  <meta name="description" content="HALNIPは、ムスリム市場と日本の文化・技術を繋ぎ、文化の継承と新市場創造を両立するブリッジカンパニーです。" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: Shippori Mincho (明朝) + Cormorant Garamond (display) + Noto Sans JP (sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+ 
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="#home" class="nav__logo-link">HALNIP</a>
+    </div>
+    <button class="nav__hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#home" data-en="HOME" data-ja="HOME">HOME</a></li>
+      <li><a href="#about" data-en="ABOUT" data-ja="ABOUT">ABOUT</a></li>
+      <li><a href="#brand" data-en="OUR BRAND" data-ja="OUR BRAND">OUR BRAND</a></li>
+      <li><a href="#journal" data-en="RELEASE & JOURNAL" data-ja="NEWS">RELEASE &amp; JOURNAL</a></li>
+      <li><a href="#contact" data-en="CONTACT" data-ja="CONTACT">CONTACT</a></li>
+      <li class="nav__lang">
+        <button id="langToggle" class="lang-btn">EN</button>
+      </li>
+    </ul>
+  </nav>
+ 
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero" id="home">
+    <div class="hero__bg">
+      <!-- Replace with brand hero image -->
+      <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1800&q=80" alt="Hero background" class="hero__bg-img" />
+      <div class="hero__overlay"></div>
+    </div>
+ 
+    <div class="hero__content">
+      <!-- Step 1: HALAL×NIPPON appears letter by letter -->
+      <div class="hero__title-wrap" id="heroTitleWrap">
+        <div class="hero__word" id="wordHalal">
+          <span class="hero__letter" style="--i:0">H</span>
+          <span class="hero__letter" style="--i:1">A</span>
+          <span class="hero__letter" style="--i:2">L</span>
+          <span class="hero__letter fade-out-letter" style="--i:3">A</span>
+          <span class="hero__letter fade-out-letter" style="--i:4">L</span>
+        </div>
+        <div class="hero__cross" id="heroCross">
+          <span class="hero__letter" style="--i:5">×</span>
+        </div>
+        <div class="hero__word" id="wordNippon">
+          <span class="hero__letter" style="--i:6">N</span>
+          <span class="hero__letter" style="--i:7">I</span>
+          <span class="hero__letter" style="--i:8">P</span>
+          <span class="hero__letter fade-out-letter" style="--i:9">P</span>
+          <span class="hero__letter fade-out-letter" style="--i:10">O</span>
+          <span class="hero__letter fade-out-letter" style="--i:11">N</span>
+        </div>
+      </div>
+ 
+      <!-- Step 2: HALNIP logo formed + tagline -->
+      <div class="hero__logo-final" id="heroLogoFinal">
+        <div class="hero__logo-text">HALNIP</div>
+        <div class="hero__tagline">Bridging Cultures Beyond Borders</div>
+      </div>
+    </div>
+ 
+    <div class="hero__scroll-hint" id="heroScroll">
+      <span class="scroll-line"></span>
+      <span class="scroll-text">SCROLL</span>
+    </div>
+  </section>
+ 
+  <!-- ========== ABOUT SECTION ========== -->
+  <section class="about" id="about">
+    <div class="about__inner container">
+      <div class="about__label section-label" data-en="ABOUT" data-ja="私たちについて">ABOUT</div>
+      <h2 class="about__title" data-en="Weaving Cultures,<br>Creating the Future" data-ja="文化を紡ぎ、<br>未来を創る">
+        文化を紡ぎ、<br>未来を創る
+      </h2>
+      <div class="about__body">
+        <p class="about__text" data-ja="日本では少子高齢化と市場縮小により、伝統的な技術や文化が担い手を失い、消滅の危機に直面しています。国内需要だけでは支えきれないこれらの価値ある資源を、成長性の高いムスリム市場（マレーシア・インドネシアなど）へ届けることが、新たな可能性の扉を開くと考えています。" data-en="In Japan, traditional crafts and culture face extinction as an aging population and shrinking market leave them without successors. We believe that delivering these invaluable resources—which domestic demand alone can no longer sustain—to the rapidly growing Muslim market (Malaysia, Indonesia, etc.) opens a door to new possibilities.">
+          日本では少子高齢化と市場縮小により、伝統的な技術や文化が担い手を失い、消滅の危機に直面しています。国内需要だけでは支えきれないこれらの価値ある資源を、成長性の高いムスリム市場（マレーシア・インドネシアなど）へ届けることが、新たな可能性の扉を開くと考えています。
+        </p>
+        <p class="about__text" data-ja="HALNIPは、ムスリムの文化や価値観に即したローカライゼーションを行い、「文化の継承」と「新市場創造」を両立します。さらに、海外で評価されたプロダクトや知恵を日本に還流することで、新たな共感と理解を生み、多文化・多宗教共生社会の実現にも貢献していきます。" data-en="HALNIP localizes products and services in accordance with Muslim culture and values, achieving both the preservation of cultural heritage and the creation of new markets. By bringing products and wisdom recognized overseas back to Japan, we foster new empathy and understanding, contributing to the realization of a multicultural, multi-religious coexisting society.">
+          HALNIPは、ムスリムの文化や価値観に即したローカライゼーションを行い、「文化の継承」と「新市場創造」を両立します。さらに、海外で評価されたプロダクトや知恵を日本に還流することで、新たな共感と理解を生み、多文化・多宗教共生社会の実現にも貢献していきます。
+        </p>
+        <a href="company.html" class="btn btn--outline" data-en="Company Overview →" data-ja="会社概要へ →">会社概要へ →</a>
+      </div>
+    </div>
+    <div class="about__deco"></div>
+  </section>
+ 
+  <!-- ========== OUR BRAND SECTION ========== -->
+  <section class="brand" id="brand">
+    <div class="brand__inner container">
+      <div class="brand__label section-label" data-en="OUR BRAND" data-ja="ブランド">OUR BRAND</div>
+ 
+      <div class="brand__hero">
+        <!-- SENSETIER Logo — replace with images/sensetier_logo.jpg -->
+        <a href="https://sensetier.com" target="_blank" rel="noopener" class="brand__logo-link">
+          <img
+            src="images/sensetier_logo.jpg"
+            alt="SENSETIER ロゴ"
+            class="brand__logo-img"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- Fallback if image is missing -->
+          <div class="brand__logo-fallback" style="display:none;">SENSETIER</div>
+        </a>
+        <p class="brand__tagline" data-en="Take ownership of your mood. A new ritual to overcome emotional waves and 'tune' yourself." data-ja="自分の機嫌は自分でとる。感情の波を克服し、自身を「調律」する新習慣。">
+          自分の機嫌は自分でとる。<br>感情の波を克服し、自身を「調律」する新習慣。
+        </p>
+        <div class="brand__cta-group">
+          <!-- TODO: Replace href with actual page URLs -->
+          <a href="https://halnip.com/sensetier_brandstory" target="_blank" rel="noopener" class="btn btn--dark" data-en="BRAND STORY" data-ja="ブランドストーリー">BRAND STORY</a>
+          <a href="https://sensetier.com" target="_blank" rel="noopener" class="btn btn--outline-light" data-en="ONLINE SHOP" data-ja="オンラインショップ">SENSETIER ONLINE SHOP</a>
+        </div>
+      </div>
+ 
+      <!-- Product Gallery — carousel on mobile, grid on desktop -->
+      <div class="brand__gallery">
+        <div class="brand__gallery-track" id="galleryTrack">
+          <div class="brand__gallery-item">
+            <!-- Replace with images/DAWN.jpg -->
+            <img src="images/DAWN.jpg" alt="DAWN" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'" />
+            <div class="brand__gallery-caption">DAWN</div>
+          </div>
+          <div class="brand__gallery-item">
+            <!-- Replace with images/BREEZE.jpg -->
+            <img src="images/BREEZE.jpg" alt="BREEZE" onerror="this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800&q=80'" />
+            <div class="brand__gallery-caption">BREEZE</div>
+          </div>
+          <div class="brand__gallery-item">
+            <!-- Replace with images/SILENCE.jpg -->
+            <img src="images/SILENCE.jpg" alt="SILENCE" onerror="this.src='https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80'" />
+            <div class="brand__gallery-caption">SILENCE</div>
+          </div>
+        </div>
+        <!-- Carousel dots (mobile) -->
+        <div class="brand__gallery-dots" id="galleryDots">
+          <button class="dot active" data-idx="0"></button>
+          <button class="dot" data-idx="1"></button>
+          <button class="dot" data-idx="2"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ========== RELEASE & JOURNAL ========== -->
+  <section class="journal" id="journal">
+    <div class="journal__inner container">
+      <div class="journal__label section-label" data-en="RELEASE &amp; JOURNAL" data-ja="最新情報">RELEASE &amp; JOURNAL</div>
+      <h2 class="journal__title" data-en="Latest News" data-ja="最新情報">Latest News</h2>
+ 
+      <div class="journal__grid">
+        <!-- Article 1 — Replace content as needed -->
+        <article class="journal__card">
+          <a href="journal/article-01.html" class="journal__card-link">
+            <div class="journal__card-img-wrap">
+              <!-- Replace with actual article thumbnail -->
+              <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80" alt="記事サムネイル" class="journal__card-img" />
+              <span class="journal__card-tag" data-en="RELEASE" data-ja="リリース">RELEASE</span>
+            </div>
+            <div class="journal__card-body">
+              <time class="journal__card-date" datetime="2025-05-01">2025.05.01</time>
+              <h3 class="journal__card-title" data-en="SENSETIER officially launched in Malaysia" data-ja="SENSETIERがマレーシアで正式ローンチ">SENSETIERがマレーシアで正式ローンチ</h3>
+              <p class="journal__card-excerpt" data-en="Our flagship brand SENSETIER has officially launched in Malaysia..." data-ja="自社ブランドSENSETIERが、マレーシア市場にて正式にローンチしました…">自社ブランドSENSETIERが、マレーシア市場にて正式にローンチしました…</p>
+            </div>
+          </a>
+        </article>
+ 
+        <!-- Article 2 -->
+        <article class="journal__card">
+          <a href="journal/article-02.html" class="journal__card-link">
+            <div class="journal__card-img-wrap">
+              <!-- Replace with actual article thumbnail -->
+              <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80" alt="記事サムネイル" class="journal__card-img" />
+              <span class="journal__card-tag" data-en="JOURNAL" data-ja="ジャーナル">JOURNAL</span>
+            </div>
+            <div class="journal__card-body">
+              <time class="journal__card-date" datetime="2025-04-15">2025.04.15</time>
+              <h3 class="journal__card-title" data-en="Muslim market insight: What resonates with Southeast Asian consumers" data-ja="ムスリム市場インサイト：東南アジア消費者に響くものとは">ムスリム市場インサイト：東南アジア消費者に響くものとは</h3>
+              <p class="journal__card-excerpt" data-en="We share our findings from field research across Malaysia and Indonesia..." data-ja="マレーシア・インドネシアでのフィールドリサーチから見えてきた知見を共有します…">マレーシア・インドネシアでのフィールドリサーチから見えてきた知見を共有します…</p>
+            </div>
+          </a>
+        </article>
+ 
+        <!-- Article 3 -->
+        <article class="journal__card">
+          <a href="journal/article-03.html" class="journal__card-link">
+            <div class="journal__card-img-wrap">
+              <!-- Replace with actual article thumbnail -->
+              <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" alt="記事サムネイル" class="journal__card-img" />
+              <span class="journal__card-tag" data-en="RELEASE" data-ja="リリース">RELEASE</span>
+            </div>
+            <div class="journal__card-body">
+              <time class="journal__card-date" datetime="2025-03-20">2025.03.20</time>
+              <h3 class="journal__card-title" data-en="HALNIP Co., Ltd. officially established" data-ja="ハルニップ株式会社、正式設立のご報告">ハルニップ株式会社、正式設立のご報告</h3>
+              <p class="journal__card-excerpt" data-en="We are pleased to announce the official establishment of HALNIP Co., Ltd..." data-ja="この度、ハルニップ株式会社が正式に設立されました。日本とムスリム市場を繋ぐ…">この度、ハルニップ株式会社が正式に設立されました。日本とムスリム市場を繋ぐ…</p>
+            </div>
+          </a>
+        </article>
+      </div>
+ 
+      <div class="journal__more">
+        <a href="journal/index.html" class="btn btn--outline" data-en="View All →" data-ja="すべて見る →">すべて見る →</a>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ========== CONTACT SECTION ========== -->
+  <section class="contact" id="contact">
+    <div class="contact__inner container">
+      <div class="contact__label section-label" data-en="CONTACT" data-ja="お問い合わせ">CONTACT</div>
+      <h2 class="contact__title" data-en="Get in Touch" data-ja="お問い合わせ">Get in Touch</h2>
+      <p class="contact__sub" data-en="Feel free to reach out for business inquiries, partnerships, or any questions." data-ja="事業に関するお問い合わせ、パートナーシップのご相談など、お気軽にご連絡ください。">
+        事業に関するお問い合わせ、パートナーシップのご相談など、<br>お気軽にご連絡ください。
+      </p>
+ 
+      <!-- Contact form — action URL to be set -->
+      <form class="contact__form" id="contactForm" action="contact-thanks.html" method="POST" novalidate>
+        <div class="form__row">
+          <div class="form__group">
+            <label class="form__label" for="name" data-en="Name *" data-ja="お名前 *">お名前 *</label>
+            <input class="form__input" type="text" id="name" name="name" required placeholder="山田 太郎" />
+          </div>
+          <div class="form__group">
+            <label class="form__label" for="company" data-en="Company" data-ja="会社名">会社名</label>
+            <input class="form__input" type="text" id="company" name="company" placeholder="株式会社◯◯" />
+          </div>
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="email" data-en="Email *" data-ja="メールアドレス *">メールアドレス *</label>
+          <input class="form__input" type="email" id="email" name="email" required placeholder="example@halnip.com" />
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="category" data-en="Inquiry Type" data-ja="お問い合わせ種別">お問い合わせ種別</label>
+          <select class="form__input form__select" id="category" name="category">
+            <option value="" data-en="Please select" data-ja="選択してください">選択してください</option>
+            <option value="business" data-en="Business Partnership" data-ja="事業提携について">事業提携について</option>
+            <option value="brand" data-en="Brand Inquiry" data-ja="ブランドに関するお問い合わせ">ブランドに関するお問い合わせ</option>
+            <option value="media" data-en="Media / Press" data-ja="取材・メディア">取材・メディア</option>
+            <option value="other" data-en="Other" data-ja="その他">その他</option>
+          </select>
+        </div>
+        <div class="form__group">
+          <label class="form__label" for="message" data-en="Message *" data-ja="お問い合わせ内容 *">お問い合わせ内容 *</label>
+          <textarea class="form__input form__textarea" id="message" name="message" required rows="6" placeholder="お問い合わせ内容をご記入ください。"></textarea>
+        </div>
+        <div class="form__submit-wrap">
+          <button type="submit" class="btn btn--filled" data-en="Send Message" data-ja="送信する">送信する</button>
+        </div>
+      </form>
+    </div>
+  </section>
+ 
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">HALNIP</div>
+          <p class="footer__tagline">Bridging Cultures Beyond Borders</p>
+          <p class="footer__company" data-en="HALNIP Co., Ltd. (ハルニップ株式会社)" data-ja="ハルニップ株式会社">ハルニップ株式会社</p>
+        </div>
+        <nav class="footer__nav">
+          <ul>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#brand">OUR BRAND</a></li>
+            <li><a href="#journal">RELEASE &amp; JOURNAL</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+          </ul>
+          <ul>
+            <li><a href="company.html" data-en="Company Overview" data-ja="会社概要">会社概要</a></li>
+            <li><a href="privacy.html" data-en="Privacy Policy" data-ja="プライバシーポリシー">プライバシーポリシー</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2025 HALNIP Co., Ltd. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+ 
+  <script src="main.js"></script>
+  <script>
+  // =============================================
+  // HERO ANIMATION SEQUENCE
+  // =============================================
+  (function() {
+    const letters = document.querySelectorAll('.hero__letter');
+    const fadeOutLetters = document.querySelectorAll('.fade-out-letter');
+    const wordHalal = document.getElementById('wordHalal');
+    const wordNippon = document.getElementById('wordNippon');
+    const heroCross = document.getElementById('heroCross');
+    const heroTitleWrap = document.getElementById('heroTitleWrap');
+    const heroLogoFinal = document.getElementById('heroLogoFinal');
+    const heroScroll = document.getElementById('heroScroll');
+ 
+    // Phase 1: Letters appear one by one (バババッと)
+    letters.forEach((letter, i) => {
+      letter.style.animationDelay = (0.05 + i * 0.07) + 's';
+      letter.classList.add('anim-in');
+    });
+ 
+    // Phase 2: Fade out AL, L from HALAL and the ×, and PON from NIPPON
+    setTimeout(() => {
+      fadeOutLetters.forEach(l => l.classList.add('fading'));
+      heroCross.classList.add('fading');
+    }, 1800);
+ 
+    // Phase 3: HAL moves right, NIP moves left toward center
+    setTimeout(() => {
+      heroTitleWrap.classList.add('merging');
+    }, 2400);
+ 
+    // Phase 4: Show final HALNIP logo + tagline
+    setTimeout(() => {
+      heroTitleWrap.style.opacity = '0';
+      heroLogoFinal.classList.add('visible');
+      heroScroll.classList.add('visible');
+    }, 3100);
+  })();
+ 
+  // =============================================
+  // HERO SCROLL FADE
+  // =============================================
+  (function() {
+    const hero = document.querySelector('.hero');
+    const heroLogoFinal = document.getElementById('heroLogoFinal');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroH = hero.offsetHeight;
+      const ratio = Math.min(scrollY / (heroH * 0.4), 1);
+      heroLogoFinal.style.opacity = 1 - ratio;
+    }, { passive: true });
+  })();
+ 
+  // =============================================
+  // NAV SCROLL BEHAVIOR
+  // =============================================
+  (function() {
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+ 
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navLinks.classList.remove('open');
+      });
+    });
+  })();
+ 
+  // =============================================
+  // LANGUAGE TOGGLE (JA / EN)
+  // =============================================
+  (function() {
+    let currentLang = 'ja';
+    const toggleBtn = document.getElementById('langToggle');
+    function applyLang(lang) {
+      document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        const val = el.getAttribute('data-' + lang);
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = val;
+        } else if (el.tagName === 'OPTION') {
+          el.textContent = val;
+        } else {
+          el.innerHTML = val;
+        }
+      });
+      document.documentElement.lang = lang;
+      toggleBtn.textContent = lang === 'ja' ? 'EN' : 'JA';
+    }
+    toggleBtn.addEventListener('click', () => {
+      currentLang = currentLang === 'ja' ? 'en' : 'ja';
+      applyLang(currentLang);
+    });
+  })();
+ 
+  // =============================================
+  // SCROLL REVEAL (Intersection Observer)
+  // =============================================
+  (function() {
+    const revealEls = document.querySelectorAll('.about__inner, .brand__inner, .journal__card, .contact__inner');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => { el.classList.add('reveal'); io.observe(el); });
+  })();
+ 
+  // =============================================
+  // GALLERY CAROUSEL (mobile touch + dots)
+  // =============================================
+  (function() {
+    const track = document.getElementById('galleryTrack');
+    const dots = document.querySelectorAll('.brand__gallery-dots .dot');
+    let current = 0;
+    function goTo(idx) {
+      current = idx;
+      track.style.transform = 'translateX(-' + (idx * 100 / 3) + '%)';
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+    dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.idx)));
+ 
+    // Touch swipe
+    let startX = 0;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) {
+        const next = diff > 0 ? Math.min(current + 1, 2) : Math.max(current - 1, 0);
+        goTo(next);
+      }
+    }, { passive: true });
+  })();
+ 
+  // =============================================
+  // CONTACT FORM — basic validation
+  // =============================================
+  (function() {
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', function(e) {
+      let valid = true;
+      form.querySelectorAll('[required]').forEach(el => {
+        el.classList.remove('error');
+        if (!el.value.trim()) { el.classList.add('error'); valid = false; }
+      });
+      if (!valid) { e.preventDefault(); }
+    });
+  })();
+  </script>
+</body>
+</html>
