@@ -9,14 +9,19 @@
   <!-- Google Fonts: Shippori Mincho (明朝) + Cormorant Garamond (display) + Noto Sans JP (sans) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600&family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
- 
+
   <!-- ========== NAVIGATION ========== -->
   <nav class="nav" id="nav">
     <div class="nav__logo">
-      <a href="#home" class="nav__logo-link">HALNIP</a>
+      <!-- Logo image: images/Halnip_Green.png (from Git) -->
+      <a href="#home" class="nav__logo-link">
+        <img src="images/Halnip_Green.png" alt="HALNIP" class="nav__logo-img"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+        <span class="nav__logo-text-fallback" style="display:none;">HALNIP</span>
+      </a>
     </div>
     <button class="nav__hamburger" id="hamburger" aria-label="メニュー">
       <span></span><span></span><span></span>
@@ -32,22 +37,31 @@
       </li>
     </ul>
   </nav>
- 
+
   <!-- ========== HERO SECTION ========== -->
   <section class="hero" id="home">
     <div class="hero__bg">
-      <!-- Replace with brand hero image -->
-      <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1800&q=80" alt="Hero background" class="hero__bg-img" />
+      <!-- 
+        ヒーロー背景画像: クアラルンプール夜景
+        ★ ローカルに差し替える場合: images/hero-bg.jpg を配置してsrcを変更
+        現在使用中URL: Unsplash / Kuala Lumpur cityscape
+      -->
+      <img
+        src="https://images.unsplash.com/photo-1596422846543-75c6fc197f11?auto=format&fit=crop&w=1800&q=80"
+        alt="Kuala Lumpur Malaysia"
+        class="hero__bg-img"
+        onerror="this.src='https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&w=1800&q=80'"
+      />
       <div class="hero__overlay"></div>
     </div>
- 
+
     <div class="hero__content">
-      <!-- Step 1: HALAL×NIPPON appears letter by letter -->
+      <!-- Phase 1 & 2: HALAL × NIPPON → HAL / NIP -->
       <div class="hero__title-wrap" id="heroTitleWrap">
         <div class="hero__word" id="wordHalal">
-          <span class="hero__letter" style="--i:0">H</span>
-          <span class="hero__letter" style="--i:1">A</span>
-          <span class="hero__letter" style="--i:2">L</span>
+          <span class="hero__letter keep-letter" style="--i:0">H</span>
+          <span class="hero__letter keep-letter" style="--i:1">A</span>
+          <span class="hero__letter keep-letter" style="--i:2">L</span>
           <span class="hero__letter fade-out-letter" style="--i:3">A</span>
           <span class="hero__letter fade-out-letter" style="--i:4">L</span>
         </div>
@@ -55,28 +69,34 @@
           <span class="hero__letter" style="--i:5">×</span>
         </div>
         <div class="hero__word" id="wordNippon">
-          <span class="hero__letter" style="--i:6">N</span>
-          <span class="hero__letter" style="--i:7">I</span>
-          <span class="hero__letter" style="--i:8">P</span>
+          <span class="hero__letter keep-letter" style="--i:6">N</span>
+          <span class="hero__letter keep-letter" style="--i:7">I</span>
+          <span class="hero__letter keep-letter" style="--i:8">P</span>
           <span class="hero__letter fade-out-letter" style="--i:9">P</span>
           <span class="hero__letter fade-out-letter" style="--i:10">O</span>
           <span class="hero__letter fade-out-letter" style="--i:11">N</span>
         </div>
       </div>
- 
-      <!-- Step 2: HALNIP logo formed + tagline -->
+
+      <!-- Phase 3: HAL slides right + NIP slides left → meet in the middle -->
+      <div class="hero__merge-stage" id="heroMergeStage">
+        <div class="hero__merge-hal" id="mergeHal">HAL</div>
+        <div class="hero__merge-nip" id="mergeNip">NIP</div>
+      </div>
+
+      <!-- Phase 4: Final HALNIP logo + tagline -->
       <div class="hero__logo-final" id="heroLogoFinal">
         <div class="hero__logo-text">HALNIP</div>
         <div class="hero__tagline">Bridging Cultures Beyond Borders</div>
       </div>
     </div>
- 
+
     <div class="hero__scroll-hint" id="heroScroll">
       <span class="scroll-line"></span>
       <span class="scroll-text">SCROLL</span>
     </div>
   </section>
- 
+
   <!-- ========== ABOUT SECTION ========== -->
   <section class="about" id="about">
     <div class="about__inner container">
@@ -96,51 +116,52 @@
     </div>
     <div class="about__deco"></div>
   </section>
- 
+
   <!-- ========== OUR BRAND SECTION ========== -->
   <section class="brand" id="brand">
     <div class="brand__inner container">
       <div class="brand__label section-label" data-en="OUR BRAND" data-ja="ブランド">OUR BRAND</div>
- 
+
       <div class="brand__hero">
-        <!-- SENSETIER Logo — replace with images/sensetier_logo.jpg -->
-        <a href="https://sensetier.com" target="_blank" rel="noopener" class="brand__logo-link">
+        <!-- SENSETIER Logo — images/sensetier_logo_header-01.png (from Git) -->
+        <div class="brand__logo-wrap">
           <img
-            src="images/sensetier_logo.jpg"
+            src="images/sensetier_logo_header-01.png"
             alt="SENSETIER ロゴ"
             class="brand__logo-img"
             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
           />
-          <!-- Fallback if image is missing -->
           <div class="brand__logo-fallback" style="display:none;">SENSETIER</div>
-        </a>
+        </div>
         <p class="brand__tagline" data-en="Take ownership of your mood. A new ritual to overcome emotional waves and 'tune' yourself." data-ja="自分の機嫌は自分でとる。感情の波を克服し、自身を「調律」する新習慣。">
           自分の機嫌は自分でとる。<br>感情の波を克服し、自身を「調律」する新習慣。
         </p>
         <div class="brand__cta-group">
-          <!-- TODO: Replace href with actual page URLs -->
-          <a href="https://halnip.com/sensetier_brandstory" target="_blank" rel="noopener" class="btn btn--dark" data-en="BRAND STORY" data-ja="ブランドストーリー">BRAND STORY</a>
-          <a href="https://sensetier.com" target="_blank" rel="noopener" class="btn btn--outline-light" data-en="ONLINE SHOP" data-ja="オンラインショップ">SENSETIER ONLINE SHOP</a>
+          <a href="brandconcept.html" class="btn btn--brand-story" data-en="BRAND STORY" data-ja="ブランドストーリー">BRAND STORY</a>
+          <a href="https://sensetier.com" target="_blank" rel="noopener" class="btn btn--brand-shop" data-en="ONLINE SHOP" data-ja="オンラインショップ">SENSETIER ONLINE SHOP</a>
         </div>
       </div>
- 
+
       <!-- Product Gallery — carousel on mobile, grid on desktop -->
       <div class="brand__gallery">
         <div class="brand__gallery-track" id="galleryTrack">
           <div class="brand__gallery-item">
             <!-- Replace with images/DAWN.jpg -->
             <img src="images/DAWN.jpg" alt="DAWN" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'" />
-            <div class="brand__gallery-caption">DAWN</div>
+            <!-- TODO: Replace href with DAWN landing page URL -->
+            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">DAWN</a>
           </div>
           <div class="brand__gallery-item">
             <!-- Replace with images/BREEZE.jpg -->
             <img src="images/BREEZE.jpg" alt="BREEZE" onerror="this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800&q=80'" />
-            <div class="brand__gallery-caption">BREEZE</div>
+            <!-- TODO: Replace href with BREEZE landing page URL -->
+            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">BREEZE</a>
           </div>
           <div class="brand__gallery-item">
             <!-- Replace with images/SILENCE.jpg -->
             <img src="images/SILENCE.jpg" alt="SILENCE" onerror="this.src='https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80'" />
-            <div class="brand__gallery-caption">SILENCE</div>
+            <!-- TODO: Replace href with SILENCE landing page URL -->
+            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">SILENCE</a>
           </div>
         </div>
         <!-- Carousel dots (mobile) -->
@@ -152,13 +173,13 @@
       </div>
     </div>
   </section>
- 
+
   <!-- ========== RELEASE & JOURNAL ========== -->
   <section class="journal" id="journal">
     <div class="journal__inner container">
       <div class="journal__label section-label" data-en="RELEASE &amp; JOURNAL" data-ja="最新情報">RELEASE &amp; JOURNAL</div>
       <h2 class="journal__title" data-en="Latest News" data-ja="最新情報">Latest News</h2>
- 
+
       <div class="journal__grid">
         <!-- Article 1 — Replace content as needed -->
         <article class="journal__card">
@@ -175,7 +196,7 @@
             </div>
           </a>
         </article>
- 
+
         <!-- Article 2 -->
         <article class="journal__card">
           <a href="journal/article-02.html" class="journal__card-link">
@@ -191,7 +212,7 @@
             </div>
           </a>
         </article>
- 
+
         <!-- Article 3 -->
         <article class="journal__card">
           <a href="journal/article-03.html" class="journal__card-link">
@@ -208,13 +229,13 @@
           </a>
         </article>
       </div>
- 
+
       <div class="journal__more">
         <a href="journal/index.html" class="btn btn--outline" data-en="View All →" data-ja="すべて見る →">すべて見る →</a>
       </div>
     </div>
   </section>
- 
+
   <!-- ========== CONTACT SECTION ========== -->
   <section class="contact" id="contact">
     <div class="contact__inner container">
@@ -223,7 +244,7 @@
       <p class="contact__sub" data-en="Feel free to reach out for business inquiries, partnerships, or any questions." data-ja="事業に関するお問い合わせ、パートナーシップのご相談など、お気軽にご連絡ください。">
         事業に関するお問い合わせ、パートナーシップのご相談など、<br>お気軽にご連絡ください。
       </p>
- 
+
       <!-- Contact form — action URL to be set -->
       <form class="contact__form" id="contactForm" action="contact-thanks.html" method="POST" novalidate>
         <div class="form__row">
@@ -260,13 +281,18 @@
       </form>
     </div>
   </section>
- 
+
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="footer__inner container">
       <div class="footer__top">
         <div class="footer__brand">
-          <div class="footer__logo">HALNIP</div>
+          <div class="footer__logo">
+            <!-- Logo image: images/Halnip_Green.png -->
+            <img src="images/Halnip_Green.png" alt="HALNIP" class="footer__logo-img"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+            <span class="footer__logo-text-fallback" style="display:none;">HALNIP</span>
+          </div>
           <p class="footer__tagline">Bridging Cultures Beyond Borders</p>
           <p class="footer__company" data-en="HALNIP Co., Ltd. (ハルニップ株式会社)" data-ja="ハルニップ株式会社">ハルニップ株式会社</p>
         </div>
@@ -285,51 +311,72 @@
         </nav>
       </div>
       <div class="footer__bottom">
-        <p class="footer__copy">&copy; 2025 HALNIP Co., Ltd. All rights reserved.</p>
+        <p class="footer__copy">&copy; 2026 HALNIP Inc. All rights reserved.</p>
       </div>
     </div>
   </footer>
- 
+
   <script src="main.js"></script>
   <script>
   // =============================================
   // HERO ANIMATION SEQUENCE
+  // Phase 1: HALAL × NIPPON letters appear (バババッ)
+  // Phase 2: AL / × / PON fade out → HAL · NIP remain
+  // Phase 3: HAL slides RIGHT, NIP slides LEFT → touch in center
+  // Phase 4: Merge stage fades, final HALNIP logo appears
   // =============================================
   (function() {
-    const letters = document.querySelectorAll('.hero__letter');
+    const letters        = document.querySelectorAll('.hero__letter');
     const fadeOutLetters = document.querySelectorAll('.fade-out-letter');
-    const wordHalal = document.getElementById('wordHalal');
-    const wordNippon = document.getElementById('wordNippon');
-    const heroCross = document.getElementById('heroCross');
-    const heroTitleWrap = document.getElementById('heroTitleWrap');
-    const heroLogoFinal = document.getElementById('heroLogoFinal');
-    const heroScroll = document.getElementById('heroScroll');
- 
-    // Phase 1: Letters appear one by one (バババッと)
-    letters.forEach((letter, i) => {
-      letter.style.animationDelay = (0.05 + i * 0.07) + 's';
-      letter.classList.add('anim-in');
-    });
- 
-    // Phase 2: Fade out AL, L from HALAL and the ×, and PON from NIPPON
+    const heroCross      = document.getElementById('heroCross');
+    const heroTitleWrap  = document.getElementById('heroTitleWrap');
+    const heroMergeStage = document.getElementById('heroMergeStage');
+    const mergeHal       = document.getElementById('mergeHal');
+    const mergeNip       = document.getElementById('mergeNip');
+    const heroLogoFinal  = document.getElementById('heroLogoFinal');
+    const heroScroll     = document.getElementById('heroScroll');
+
+    // ── Phase 1: letters fly in one by one
+    letters.forEach(letter => letter.classList.add('anim-in'));
+
+    // ── Phase 2: fade out unwanted letters + cross
     setTimeout(() => {
       fadeOutLetters.forEach(l => l.classList.add('fading'));
       heroCross.classList.add('fading');
-    }, 1800);
- 
-    // Phase 3: HAL moves right, NIP moves left toward center
+    }, 1700);
+
+    // ── Phase 3: swap to merge stage, HAL→right / NIP→left
     setTimeout(() => {
-      heroTitleWrap.classList.add('merging');
-    }, 2400);
- 
-    // Phase 4: Show final HALNIP logo + tagline
-    setTimeout(() => {
+      // Hide phase-1 wrap, show merge stage
+      heroTitleWrap.style.transition = 'opacity 0.25s ease';
       heroTitleWrap.style.opacity = '0';
-      heroLogoFinal.classList.add('visible');
-      heroScroll.classList.add('visible');
-    }, 3100);
+
+      setTimeout(() => {
+        heroTitleWrap.style.display = 'none';
+        heroMergeStage.classList.add('visible');
+
+        // Small delay so CSS transition fires after display change
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            mergeHal.classList.add('slide-right');
+            mergeNip.classList.add('slide-left');
+          });
+        });
+      }, 250);
+    }, 2500);
+
+    // ── Phase 4: show final HALNIP + tagline
+    setTimeout(() => {
+      heroMergeStage.style.transition = 'opacity 0.35s ease';
+      heroMergeStage.style.opacity = '0';
+      setTimeout(() => {
+        heroMergeStage.style.display = 'none';
+        heroLogoFinal.classList.add('visible');
+        heroScroll.classList.add('visible');
+      }, 350);
+    }, 3600);
   })();
- 
+
   // =============================================
   // HERO SCROLL FADE
   // =============================================
@@ -343,7 +390,7 @@
       heroLogoFinal.style.opacity = 1 - ratio;
     }, { passive: true });
   })();
- 
+
   // =============================================
   // NAV SCROLL BEHAVIOR
   // =============================================
@@ -352,7 +399,7 @@
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
- 
+
     // Hamburger
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
@@ -367,7 +414,7 @@
       });
     });
   })();
- 
+
   // =============================================
   // LANGUAGE TOGGLE (JA / EN)
   // =============================================
@@ -393,7 +440,7 @@
       applyLang(currentLang);
     });
   })();
- 
+
   // =============================================
   // SCROLL REVEAL (Intersection Observer)
   // =============================================
@@ -406,7 +453,7 @@
     }, { threshold: 0.12 });
     revealEls.forEach(el => { el.classList.add('reveal'); io.observe(el); });
   })();
- 
+
   // =============================================
   // GALLERY CAROUSEL (mobile touch + dots)
   // =============================================
@@ -420,7 +467,7 @@
       dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     }
     dots.forEach(dot => dot.addEventListener('click', () => goTo(+dot.dataset.idx)));
- 
+
     // Touch swipe
     let startX = 0;
     track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
@@ -432,7 +479,7 @@
       }
     }, { passive: true });
   })();
- 
+
   // =============================================
   // CONTACT FORM — basic validation
   // =============================================

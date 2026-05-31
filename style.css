@@ -3,7 +3,7 @@
    style.css
    Last updated: 2025
    ============================================= */
- 
+
 /* ─── CSS VARIABLES ─────────────────────────── */
 :root {
   /* Brand Colors */
@@ -18,31 +18,32 @@
   --color-text-muted:    #6b6660;
   --color-border:        #d8d0c4;
   --color-bg-section:    #f7f4ee;
- 
+
   /* Typography */
   --font-serif:          'Shippori Mincho', 'Noto Serif JP', Georgia, serif;
   --font-display:        'Cormorant Garamond', 'Shippori Mincho', Georgia, serif;
   --font-sans:           'Noto Sans JP', 'Hiragino Kaku Gothic Pro', sans-serif;
- 
+  --font-hero:           'Montserrat', sans-serif;       /* Hero HALNIP logo */
+
   /* Spacing */
   --section-pad:         clamp(80px, 10vw, 140px);
   --container-max:       1200px;
   --container-pad:       clamp(20px, 5vw, 60px);
- 
+
   /* Transitions */
   --transition-fast:     0.2s ease;
   --transition-mid:      0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --transition-slow:     0.8s cubic-bezier(0.16, 1, 0.3, 1);
- 
+
   /* Nav */
   --nav-height:          72px;
 }
- 
+
 /* ─── RESET & BASE ───────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
 html { scroll-behavior: smooth; font-size: 16px; }
- 
+
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
@@ -51,32 +52,32 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
- 
+
 img { display: block; max-width: 100%; height: auto; }
 a  { text-decoration: none; color: inherit; }
 ul { list-style: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
- 
+
 /* ─── UTILITY ────────────────────────────────── */
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--container-pad);
 }
- 
+
 .section-label {
   font-family: var(--font-display);
-  font-size: clamp(0.65rem, 1vw, 0.75rem);
-  letter-spacing: 0.25em;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--color-accent);
   margin-bottom: 1.5rem;
 }
- 
+
 /* ─── SCROLL REVEAL ──────────────────────────── */
 .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.9s var(--transition-slow), transform 0.9s var(--transition-slow); }
 .reveal.revealed { opacity: 1; transform: none; }
- 
+
 /* ─── BUTTONS ────────────────────────────────── */
 .btn {
   display: inline-block;
@@ -89,26 +90,26 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
 }
 .btn:hover { transform: translateY(-2px); }
- 
+
 .btn--outline {
   border: 1px solid var(--color-primary);
   color: var(--color-primary);
 }
 .btn--outline:hover { background: var(--color-primary); color: var(--color-white); }
- 
+
 .btn--outline-light {
   border: 1px solid var(--color-white);
   color: var(--color-white);
 }
 .btn--outline-light:hover { background: var(--color-white); color: var(--color-primary); }
- 
+
 .btn--dark {
   background: var(--color-primary);
   color: var(--color-white);
   border: 1px solid var(--color-primary);
 }
 .btn--dark:hover { background: var(--color-primary-dark); }
- 
+
 .btn--filled {
   background: var(--color-accent);
   color: var(--color-white);
@@ -117,7 +118,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 1em 3em;
 }
 .btn--filled:hover { background: var(--color-accent-light); border-color: var(--color-accent-light); }
- 
+
 /* ─── NAVIGATION ─────────────────────────────── */
 .nav {
   position: fixed;
@@ -135,17 +136,30 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   backdrop-filter: blur(12px);
   box-shadow: 0 1px 24px rgba(0,0,0,0.18);
 }
- 
+
 .nav__logo-link {
+  display: flex;
+  align-items: center;
+  transition: opacity var(--transition-fast);
+}
+.nav__logo-link:hover { opacity: 0.8; }
+
+/* Logo image — height fixed, width auto */
+.nav__logo-img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+/* Text fallback (if image fails to load) */
+.nav__logo-text-fallback {
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 300;
   letter-spacing: 0.28em;
   color: var(--color-white);
-  transition: opacity var(--transition-fast);
 }
-.nav__logo-link:hover { opacity: 0.75; }
- 
+
 .nav__links {
   display: flex;
   align-items: center;
@@ -161,7 +175,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   white-space: nowrap;
 }
 .nav__links a:hover { color: var(--color-accent-light); }
- 
+
 .lang-btn {
   font-family: var(--font-display);
   font-size: 0.72rem;
@@ -172,7 +186,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: all var(--transition-fast);
 }
 .lang-btn:hover { color: var(--color-white); border-color: var(--color-white); }
- 
+
 /* Hamburger */
 .nav__hamburger {
   display: none;
@@ -190,7 +204,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .nav__hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
 .nav__hamburger.open span:nth-child(2) { opacity: 0; }
 .nav__hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
- 
+
 /* ─── HERO ───────────────────────────────────── */
 .hero {
   position: relative;
@@ -202,7 +216,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   justify-content: center;
   overflow: hidden;
 }
- 
+
 .hero__bg { position: absolute; inset: 0; z-index: 0; }
 .hero__bg-img {
   width: 100%; height: 100%;
@@ -218,7 +232,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
     rgba(18, 44, 30, 0.70) 100%
   );
 }
- 
+
 .hero__content {
   position: relative;
   z-index: 2;
@@ -230,24 +244,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   justify-content: center;
   min-height: 180px;
 }
- 
+
 /* ── Hero title: HALAL × NIPPON ── */
 .hero__title-wrap {
   display: flex;
   align-items: baseline;
   gap: 0.1em;
-  font-family: var(--font-display);
+  font-family: var(--font-hero);
   font-size: clamp(3.5rem, 10vw, 8rem);
-  font-weight: 300;
-  letter-spacing: 0.04em;
+  font-weight: 200;
+  letter-spacing: 0.08em;
   color: var(--color-white);
   transition: opacity 0.5s ease;
   pointer-events: none;
 }
- 
+
 .hero__word { display: flex; }
 .hero__cross { margin: 0 0.08em; }
- 
+
 .hero__letter {
   display: inline-block;
   opacity: 0;
@@ -261,7 +275,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   from { opacity: 0; transform: translateX(-22px); }
   to   { opacity: 1; transform: translateX(0); }
 }
- 
+
 .hero__letter.fading {
   animation: fadeLetterOut 0.45s ease forwards;
 }
@@ -271,21 +285,41 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @keyframes fadeLetterOut {
   to { opacity: 0; transform: scale(0.7); }
 }
- 
-/* HAL moves right, NIP stays, merge effect */
-.hero__title-wrap.merging #wordHalal {
-  animation: slideRight 0.55s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+
+/* ── Hero Merge Stage (Phase 3) ── */
+.hero__merge-stage {
+  position: absolute;
+  display: none;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0;
+  font-family: var(--font-hero);
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--color-white);
+  pointer-events: none;
+  opacity: 0;
 }
-.hero__title-wrap.merging #wordNippon {
-  animation: slideLeft 0.55s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
+.hero__merge-stage.visible {
+  display: flex;
+  opacity: 1;
 }
-@keyframes slideRight {
-  to { transform: translateX(0.3em); }
+
+.hero__merge-hal,
+.hero__merge-nip {
+  display: inline-block;
+  transition: transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-@keyframes slideLeft {
-  to { transform: translateX(-0.3em); }
-}
- 
+
+/* Start positions — HAL far left of center, NIP far right */
+.hero__merge-hal { transform: translateX(-1.5em); }
+.hero__merge-nip { transform: translateX(1.5em); }
+
+/* Slide toward each other until touching */
+.hero__merge-hal.slide-right { transform: translateX(0); }
+.hero__merge-nip.slide-left  { transform: translateX(0); }
+
 /* ── Hero Final Logo ── */
 .hero__logo-final {
   position: absolute;
@@ -302,22 +336,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   pointer-events: auto;
 }
 .hero__logo-text {
-  font-family: var(--font-display);
+  font-family: var(--font-hero);
   font-size: clamp(4rem, 12vw, 9.5rem);
-  font-weight: 300;
-  letter-spacing: 0.18em;
+  font-weight: 400;
+  letter-spacing: 0.22em;
   color: var(--color-white);
   line-height: 1;
 }
 .hero__tagline {
-  font-family: var(--font-display);
-  font-size: clamp(0.85rem, 2vw, 1.25rem);
+  font-family: var(--font-hero);
+  font-size: clamp(0.6rem, 1.5vw, 0.85rem);
   font-weight: 300;
-  letter-spacing: 0.3em;
-  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.38em;
+  color: rgba(255,255,255,0.75);
   text-transform: uppercase;
 }
- 
+
 /* ── Scroll Hint ── */
 .hero__scroll-hint {
   position: absolute;
@@ -333,7 +367,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: opacity 1s ease 0.5s;
 }
 .hero__scroll-hint.visible { opacity: 1; }
- 
+
 .scroll-line {
   display: block;
   width: 1px;
@@ -352,7 +386,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: rgba(255,255,255,0.6);
   text-transform: uppercase;
 }
- 
+
 /* ─── ABOUT ──────────────────────────────────── */
 .about {
   position: relative;
@@ -360,14 +394,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: var(--color-white);
   overflow: hidden;
 }
- 
+
 .about__inner {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: clamp(3rem, 6vw, 7rem);
   align-items: start;
 }
- 
+
 .about__title {
   font-family: var(--font-serif);
   font-size: clamp(1.8rem, 4vw, 3rem);
@@ -379,19 +413,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: sticky;
   top: calc(var(--nav-height) + 2rem);
 }
- 
+
 .about__body { display: flex; flex-direction: column; gap: 1.8rem; }
- 
+
 .about__text {
   font-family: var(--font-sans);
-  font-size: clamp(0.9rem, 1.3vw, 1rem);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
   font-weight: 300;
-  line-height: 2;
+  line-height: 2.1;
   color: var(--color-text-muted);
 }
- 
+
 .about__label { grid-column: 1 / -1; }
- 
+
 .about__deco {
   position: absolute;
   right: -120px; bottom: -60px;
@@ -401,30 +435,30 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   opacity: 0.4;
   pointer-events: none;
 }
- 
+
 /* ─── OUR BRAND ──────────────────────────────── */
 .brand {
   padding: var(--section-pad) 0;
-  background: var(--color-primary);
-  color: var(--color-white);
+  background: #e8e0d5;       /* Warm parchment earth tone */
+  color: var(--color-text);
   position: relative;
   overflow: hidden;
 }
- 
+
 .brand::before {
   content: '';
   position: absolute;
   top: -120px; left: -120px;
   width: 500px; height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(181,150,90,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(181,150,90,0.15) 0%, transparent 70%);
   pointer-events: none;
 }
- 
+
 .brand__inner { position: relative; z-index: 1; }
- 
-.brand__label { color: var(--color-accent-light); }
- 
+
+.brand__label { color: var(--color-accent); }
+
 .brand__hero {
   display: flex;
   flex-direction: column;
@@ -433,95 +467,114 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-bottom: clamp(3rem, 6vw, 5rem);
   gap: clamp(1.5rem, 3vw, 2.5rem);
 }
- 
-/* Logo image */
-.brand__logo-link {
+
+/* Logo wrap — ホバーなし・リンクなし */
+.brand__logo-wrap {
   display: inline-block;
-  transition: transform var(--transition-mid), filter var(--transition-mid);
-}
-.brand__logo-link:hover {
-  transform: scale(1.04);
-  filter: brightness(1.08);
 }
 .brand__logo-img {
   max-width: clamp(180px, 35vw, 320px);
   height: auto;
-  /* Remove if logo has transparent bg — adjust mix-blend-mode as needed */
-  mix-blend-mode: luminosity;
-  filter: brightness(0) invert(1);
-  transition: filter var(--transition-mid);
 }
-.brand__logo-link:hover .brand__logo-img {
-  filter: brightness(0) invert(1) sepia(0.3) saturate(2);
-}
- 
+
 /* Fallback text logo */
 .brand__logo-fallback {
   font-family: var(--font-display);
   font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 300;
   letter-spacing: 0.35em;
-  color: var(--color-white);
+  color: var(--color-primary);
   align-items: center;
   justify-content: center;
 }
- 
+
+/* BRAND STORY — 枠線・文字ともに #3E231A */
+.btn--brand-story {
+  border: 1px solid #3E231A;
+  color: #3E231A;
+  background: transparent;
+}
+.btn--brand-story:hover {
+  background: #3E231A;
+  color: var(--color-white);
+}
+
+/* SENSETIER ONLINE SHOP — 塗り #3E231A */
+.btn--brand-shop {
+  background: #3E231A;
+  color: var(--color-white);
+  border: 1px solid #3E231A;
+}
+.btn--brand-shop:hover {
+  background: #2a1610;
+  border-color: #2a1610;
+}
+
 .brand__tagline {
   font-family: var(--font-serif);
   font-size: clamp(1rem, 2vw, 1.3rem);
   font-weight: 400;
   line-height: 1.9;
-  color: rgba(255,255,255,0.82);
+  color: var(--color-text-muted);
   letter-spacing: 0.06em;
   max-width: 560px;
 }
- 
+
 .brand__cta-group {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
   justify-content: center;
 }
- 
+
 /* ── Product Gallery ── */
 .brand__gallery {
   position: relative;
   overflow: hidden;
 }
- 
+
 .brand__gallery-track {
   display: flex;
   gap: clamp(1rem, 2vw, 1.5rem);
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
- 
+
 .brand__gallery-item {
   flex: 0 0 calc((100% - 2 * clamp(1rem,2vw,1.5rem)) / 3);
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
   background: var(--color-primary-dark);
 }
- 
+
 .brand__gallery-item img {
-  width: 100%; height: 100%;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
+  display: block;
   transition: transform 0.7s var(--transition-slow);
 }
-.brand__gallery-item:hover img { transform: scale(1.06); }
- 
-.brand__gallery-caption {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 1.2rem 1.5rem;
-  background: linear-gradient(to top, rgba(18,44,30,0.85) 0%, transparent 100%);
+.brand__gallery-item:hover img { transform: scale(1.04); }
+
+/* Landing page button below each image */
+.brand__gallery-btn {
+  display: block;
+  text-align: center;
   font-family: var(--font-display);
-  font-size: clamp(1rem, 2vw, 1.4rem);
-  letter-spacing: 0.3em;
-  color: var(--color-white);
+  font-size: clamp(0.75rem, 1.1vw, 0.88rem);
+  letter-spacing: 0.28em;
   text-transform: uppercase;
+  padding: 1em 1.2em;
+  background: #a8844a;          /* Deeper champagne gold — richer than bg */
+  color: var(--color-white);
+  border-top: 1px solid #c9a96e;
+  transition: background var(--transition-fast), letter-spacing var(--transition-fast);
+  flex-shrink: 0;
 }
- 
+.brand__gallery-btn:hover {
+  background: #8e6d3a;
+  letter-spacing: 0.36em;
+}
+
 /* Gallery dots — hidden on desktop */
 .brand__gallery-dots {
   display: none;
@@ -532,17 +585,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.3);
+  background: rgba(26,20,12,0.2);
   transition: background var(--transition-fast), transform var(--transition-fast);
 }
 .dot.active { background: var(--color-accent); transform: scale(1.25); }
- 
+
 /* ─── RELEASE & JOURNAL ──────────────────────── */
 .journal {
   padding: var(--section-pad) 0;
   background: var(--color-bg-section);
 }
- 
+
 .journal__title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.5rem);
@@ -551,13 +604,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--color-primary);
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
- 
+
 .journal__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: clamp(1.2rem, 2.5vw, 2rem);
 }
- 
+
 .journal__card {
   background: var(--color-white);
   overflow: hidden;
@@ -567,9 +620,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transform: translateY(-6px);
   box-shadow: 0 16px 48px rgba(26,62,42,0.12);
 }
- 
+
 .journal__card-link { display: block; }
- 
+
 .journal__card-img-wrap {
   position: relative;
   aspect-ratio: 16 / 10;
@@ -582,7 +635,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: transform 0.65s var(--transition-slow);
 }
 .journal__card:hover .journal__card-img { transform: scale(1.06); }
- 
+
 .journal__card-tag {
   position: absolute;
   top: 0.9rem; left: 0.9rem;
@@ -594,9 +647,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--color-white);
   padding: 0.28em 0.8em;
 }
- 
+
 .journal__card-body { padding: 1.5rem 1.5rem 2rem; }
- 
+
 .journal__card-date {
   font-family: var(--font-display);
   font-size: 0.72rem;
@@ -605,7 +658,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: block;
   margin-bottom: 0.6rem;
 }
- 
+
 .journal__card-title {
   font-family: var(--font-serif);
   font-size: clamp(0.9rem, 1.4vw, 1.05rem);
@@ -615,7 +668,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-bottom: 0.8rem;
   letter-spacing: 0.02em;
 }
- 
+
 .journal__card-excerpt {
   font-family: var(--font-sans);
   font-size: 0.82rem;
@@ -627,17 +680,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
- 
+
 .journal__more { text-align: center; margin-top: clamp(2.5rem, 4vw, 3.5rem); }
- 
+
 /* ─── CONTACT ────────────────────────────────── */
 .contact {
   padding: var(--section-pad) 0;
   background: var(--color-white);
 }
- 
+
 .contact__inner { max-width: 760px; }
- 
+
 .contact__title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.5rem);
@@ -646,7 +699,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--color-primary);
   margin-bottom: 1rem;
 }
- 
+
 .contact__sub {
   font-family: var(--font-sans);
   font-size: clamp(0.85rem, 1.2vw, 0.95rem);
@@ -655,18 +708,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.9;
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }
- 
+
 /* Form */
 .contact__form { display: flex; flex-direction: column; gap: 1.6rem; }
- 
+
 .form__row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.4rem;
 }
- 
+
 .form__group { display: flex; flex-direction: column; gap: 0.55rem; }
- 
+
 .form__label {
   font-family: var(--font-display);
   font-size: 0.72rem;
@@ -674,7 +727,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   text-transform: uppercase;
   color: var(--color-primary);
 }
- 
+
 .form__input {
   font-family: var(--font-sans);
   font-size: 0.92rem;
@@ -695,20 +748,20 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   box-shadow: 0 0 0 3px rgba(26,62,42,0.08);
 }
 .form__input.error { border-color: #c0392b; }
- 
+
 .form__select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a3e2a' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1.1em center; padding-right: 2.5em; cursor: pointer; }
- 
+
 .form__textarea { resize: vertical; min-height: 140px; }
- 
+
 .form__submit-wrap { display: flex; }
- 
+
 /* ─── FOOTER ─────────────────────────────────── */
 .footer {
   background: var(--color-primary-dark);
   color: rgba(255,255,255,0.72);
   padding: clamp(3rem, 6vw, 5rem) 0 2rem;
 }
- 
+
 .footer__top {
   display: flex;
   justify-content: space-between;
@@ -719,53 +772,64 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-bottom: 1.8rem;
   flex-wrap: wrap;
 }
- 
+
 .footer__logo {
+  margin-bottom: 0.5rem;
+}
+
+.footer__logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
+  /* Green logo on dark bg — brighten slightly if needed */
+  filter: brightness(1.1);
+}
+
+.footer__logo-text-fallback {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 300;
   letter-spacing: 0.3em;
   color: var(--color-white);
-  margin-bottom: 0.5rem;
 }
- 
+
 .footer__tagline {
   font-family: var(--font-display);
-  font-size: 0.75rem;
+  font-size: 0.92rem;
   letter-spacing: 0.2em;
   color: var(--color-accent-light);
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
- 
+
 .footer__company {
   font-family: var(--font-sans);
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: rgba(255,255,255,0.5);
 }
- 
+
 .footer__nav {
   display: flex;
   gap: clamp(2rem, 5vw, 4rem);
 }
-.footer__nav ul { display: flex; flex-direction: column; gap: 0.7rem; }
+.footer__nav ul { display: flex; flex-direction: column; gap: 0.8rem; }
 .footer__nav a {
   font-family: var(--font-display);
-  font-size: 0.72rem;
+  font-size: 0.92rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.6);
   transition: color var(--transition-fast);
 }
 .footer__nav a:hover { color: var(--color-accent-light); }
- 
+
 .footer__copy {
   font-family: var(--font-display);
-  font-size: 0.65rem;
+  font-size: 0.82rem;
   letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255,255,255,0.4);
 }
- 
+
 /* ─── RESPONSIVE — TABLET ────────────────────── */
 @media (max-width: 900px) {
   .about__inner {
@@ -774,14 +838,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .about__title { position: static; font-size: clamp(1.6rem, 5vw, 2.4rem); }
   .about__label { grid-column: 1; }
- 
+
   .journal__grid { grid-template-columns: 1fr 1fr; }
 }
- 
+
 /* ─── RESPONSIVE — MOBILE ────────────────────── */
 @media (max-width: 640px) {
   :root { --section-pad: 64px; }
- 
+
   /* Nav */
   .nav__hamburger { display: flex; }
   .nav__links {
@@ -803,34 +867,35 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .nav__links.open { transform: translateX(0); pointer-events: auto; }
   .nav__links a { font-size: 1rem; }
   .nav__lang { margin-top: 1rem; }
- 
+
   /* Hero */
-  .hero__title-wrap { font-size: clamp(2.2rem, 14vw, 4rem); gap: 0.05em; }
-  .hero__logo-text  { font-size: clamp(3rem, 18vw, 6rem); letter-spacing: 0.12em; }
-  .hero__tagline    { font-size: clamp(0.6rem, 3.5vw, 0.9rem); letter-spacing: 0.2em; }
- 
+  .hero__title-wrap { font-size: clamp(2.2rem, 14vw, 4rem); gap: 0.05em; font-weight: 200; }
+  .hero__logo-text  { font-size: clamp(3rem, 18vw, 6rem); letter-spacing: 0.14em; }
+  .hero__tagline    { font-size: clamp(0.5rem, 2.8vw, 0.75rem); letter-spacing: 0.25em; }
+
   /* Brand gallery — carousel mode */
+  .brand__gallery { overflow: hidden; }
   .brand__gallery-track {
     width: calc(3 * 100%);
     gap: 0;
   }
   .brand__gallery-item {
     flex: 0 0 calc(100% / 3);
-    aspect-ratio: 4 / 5;
   }
+  .brand__gallery-item img { aspect-ratio: 4 / 5; }
   .brand__gallery-dots { display: flex; }
- 
+
   /* Journal */
   .journal__grid { grid-template-columns: 1fr; }
- 
+
   /* Contact form */
   .form__row { grid-template-columns: 1fr; }
- 
+
   /* Footer */
   .footer__top { flex-direction: column; gap: 2rem; }
   .footer__nav { flex-direction: column; gap: 1.5rem; }
 }
- 
+
 /* ─── FINE-TOUCH HOVER STATES ────────────────── */
 @media (hover: hover) {
   .nav__links a::after {
@@ -845,7 +910,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .nav__links a:hover::after { transform: scaleX(1); }
 }
- 
+
 /* ─── PRINT BASICS ───────────────────────────── */
 @media print {
   .nav, .hero__scroll-hint, .hero__bg { display: none; }

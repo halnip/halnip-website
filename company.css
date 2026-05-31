@@ -1,0 +1,233 @@
+/* =============================================
+   company.css — 会社概要ページ専用スタイル
+   style.css の変数・共通クラスを継承
+   ============================================= */
+
+/* ── サブページ共通：ナビを常時不透明に ── */
+.subpage .nav {
+  background: rgba(18, 44, 30, 0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 24px rgba(0,0,0,0.18);
+}
+
+/* ─── PAGE HERO ──────────────────────────────── */
+.page-hero {
+  padding: calc(var(--nav-height) + clamp(1.5rem, 3vw, 2.5rem)) 0 clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--color-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景装飾サークル */
+.page-hero::before {
+  content: '';
+  position: absolute;
+  right: -160px; top: -160px;
+  width: 560px; height: 560px;
+  border-radius: 50%;
+  border: 1px solid rgba(181,150,90,0.18);
+  pointer-events: none;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 1px solid rgba(181,150,90,0.12);
+  pointer-events: none;
+}
+
+.page-hero__inner { position: relative; z-index: 1; }
+
+.page-hero__label {
+  color: var(--color-accent-light);
+  margin-bottom: 0.6rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+}
+
+.page-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.page-hero__line {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 1px;
+  background: linear-gradient(to right, var(--color-accent) 0%, transparent 60%);
+}
+
+/* ─── COMPANY PROFILE ────────────────────────── */
+.company-profile {
+  padding: var(--section-pad) 0;
+  background: var(--color-white);
+}
+
+.company-profile__inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 8vw, 7rem);
+}
+
+/* Vision block — 上段: OUR MISSION + タイトル左揃え / 下段: 全幅テキスト */
+.company-vision {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: clamp(2rem, 4vw, 3rem);
+}
+
+.company-vision__top {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+}
+
+.company-vision__en {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.company-vision__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.company-vision__text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.88rem, 1.15vw, 0.96rem);
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+  width: 100%;
+}
+
+/* Company table */
+.company-table-wrap {
+  border-top: 1px solid var(--color-border);
+}
+
+.company-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.company-table tr {
+  border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition-fast);
+}
+.company-table tr:hover { background: var(--color-off-white); }
+
+.company-table th,
+.company-table td {
+  padding: clamp(1.1rem, 2.5vw, 1.6rem) clamp(1rem, 2vw, 2rem);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.9;
+}
+
+.company-table th {
+  font-family: var(--font-display);
+  font-size: clamp(0.78rem, 1.1vw, 0.9rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  white-space: nowrap;
+  width: 220px;
+  font-weight: 400;
+}
+
+.company-table td {
+  font-family: var(--font-sans);
+  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  font-weight: 300;
+  color: var(--color-text);
+}
+
+/* ─── MAP SECTION ────────────────────────────── */
+.company-map {
+  padding: var(--section-pad) 0;
+  background: var(--color-bg-section);
+}
+
+.company-map__label {
+  margin-bottom: 2rem;
+}
+
+.company-map__frame {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  margin-bottom: 1.4rem;
+}
+
+.company-map__frame iframe {
+  display: block;
+  width: 100%;
+  height: clamp(280px, 40vw, 480px);
+  filter: grayscale(20%) contrast(1.05);
+}
+
+.company-map__address {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  font-weight: 300;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+/* ─── BACK LINK ──────────────────────────────── */
+.page-back {
+  padding: clamp(3rem, 5vw, 5rem) 0;
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 760px) {
+  .company-vision__top { flex-direction: column; gap: 0.4rem; }
+  .company-vision__title { white-space: normal; }
+
+  .company-table th {
+    width: 120px;
+    font-size: 0.72rem;
+  }
+  .company-table th,
+  .company-table td { padding: 1rem 0.8rem; }
+}
+
+@media (max-width: 480px) {
+  .company-table thead,
+  .company-table tr,
+  .company-table th,
+  .company-table td {
+    display: block;
+  }
+  .company-table th {
+    width: 100%;
+    padding-bottom: 0.3rem;
+    border-bottom: none;
+  }
+  .company-table td {
+    padding-top: 0;
+    padding-left: 0.8rem;
+  }
+}
