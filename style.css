@@ -39,6 +39,54 @@
   --nav-height:          72px;
 }
 
+/* ─── CUSTOM CURSOR ──────────────────────────── */
+body, a, button, input, textarea, select, label { cursor: none !important; }
+
+.c-cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 6px; height: 6px;
+  background: var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-100px, -100px);
+  margin-left: -3px; margin-top: -3px;
+  transition: opacity 0.3s, background 0.2s, transform 0.05s;
+  will-change: transform;
+}
+.c-cursor-dot.hover {
+  background: var(--color-white);
+  transform: scale(0) !important; /* リング拡大中はドット消す */
+}
+
+.c-cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 34px; height: 34px;
+  border: 1.5px solid rgba(181, 150, 90, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-100px, -100px);
+  margin-left: -17px; margin-top: -17px;
+  transition: width 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+              height 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
+              border-color 0.35s, background 0.35s, opacity 0.3s;
+  will-change: transform;
+}
+.c-cursor-ring.hover {
+  width: 58px; height: 58px;
+  margin-left: -29px; margin-top: -29px;
+  border-color: rgba(181, 150, 90, 0.9);
+  background: rgba(181, 150, 90, 0.07);
+}
+.c-cursor-ring.click {
+  width: 28px; height: 28px;
+  margin-left: -14px; margin-top: -14px;
+  background: rgba(181, 150, 90, 0.15);
+}
+
 /* ─── RESET & BASE ───────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
