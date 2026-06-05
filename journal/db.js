@@ -4,7 +4,7 @@
 const HALNIP_DB = (function () {
   const KEY           = 'halnip_journal_posts';
   const SESSION_KEY   = 'halnip_admin_session';
-  const ADMIN_PASS    = 'halnip2026'; // ← 変更可
+  const ADMIN_PASS    = 'HnImanon21'; // ← 変更可
 
   const SEED = [
     {
