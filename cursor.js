@@ -25,8 +25,8 @@
 
   // ── リングは lerp でゆっくり追従 ──
   (function animate() {
-    rX += (mX - rX) * 0.1;
-    rY += (mY - rY) * 0.1;
+    rX += (mX - rX) * 0.2;
+    rY += (mY - rY) * 0.2;
     ring.style.transform = `translate(${rX}px, ${rY}px)`;
     requestAnimationFrame(animate);
   })();
