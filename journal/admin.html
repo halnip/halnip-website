@@ -203,7 +203,10 @@
     }
     document.getElementById('logoutBtn').addEventListener('click', () => {
       HALNIP_DB.logout();
-      location.reload();
+      document.getElementById('adminPanel').style.display  = 'none';
+      document.getElementById('loginScreen').style.display = 'flex';
+      document.getElementById('loginInput').value = '';
+      document.getElementById('loginErr').textContent = '';
     });
 
     // ── State ──
