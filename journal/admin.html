@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理画面 | HALNIP Journal</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="journal.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600&family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="admin-body">
+
+  <!-- ===== LOGIN SCREEN ===== -->
+  <div id="loginScreen" class="admin-login">
+    <div class="admin-login__box">
+      <div class="admin-login__logo">HALNIP</div>
+      <div class="admin-login__sub">Journal Admin</div>
+      <input type="password" id="loginInput" class="admin-login__input" placeholder="パスワードを入力" autocomplete="current-password" />
+      <button class="admin-login__btn" id="loginBtn">ログイン</button>
+      <p class="admin-login__err" id="loginErr"></p>
+    </div>
+  </div>
+
+  <!-- ===== ADMIN PANEL ===== -->
+  <div id="adminPanel" style="display:none;">
+
+    <!-- Header -->
+    <header class="admin-header">
+      <span class="admin-header__title">HALNIP · Journal Admin</span>
+      <div class="admin-header__actions">
+        <button class="admin-header__btn admin-header__btn--accent" id="exportBtn">JSON Export</button>
+        <button class="admin-header__btn" id="importBtnTrigger">Import</button>
+        <input type="file" id="importFile" accept=".json" style="display:none;" />
+        <a href="index.html" class="admin-header__btn" style="text-decoration:none;">← 一覧へ</a>
+        <button class="admin-header__btn" id="logoutBtn">ログアウト</button>
+      </div>
+    </header>
+
+    <!-- Layout -->
+    <div class="admin-wrap">
+
+      <!-- Sidebar: post list -->
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar__top">
+          <button class="admin-new-btn" id="newPostBtn">+ 新規投稿</button>
+          <select class="admin-filter-select" id="sidebarFilter">
+            <option value="all">すべて</option>
+            <option value="published">公開中</option>
+            <option value="draft">下書き</option>
+          </select>
+        </div>
+        <div class="admin-post-list" id="adminPostList"></div>
+      </aside>
+
+      <!-- Editor -->
+      <main class="admin-editor-wrap" id="adminEditorWrap">
+        <div class="admin-editor-wrap--empty" id="editorEmpty">← 記事を選択するか、新規投稿を作成してください</div>
+        <form class="editor-form" id="editorForm" style="display:none;" novalidate>
+
+          <!-- Meta -->
+          <p class="editor-section-title">基本情報</p>
+          <div class="editor-row">
+            <div class="editor-group">
+              <label class="editor-label" for="fTag">カテゴリー</label>
+              <select class="editor-select" id="fTag" name="tag">
+                <option value="RELEASE">RELEASE</option>
+                <option value="JOURNAL">JOURNAL</option>
+              </select>
+            </div>
+            <div class="editor-group">
+              <label class="editor-label" for="fDate">日付</label>
+              <input class="editor-input" type="date" id="fDate" name="date" required />
+            </div>
+          </div>
+          <div class="editor-group">
+            <label class="editor-label" for="fThumb">サムネイル URL</label>
+            <input class="editor-input" type="url" id="fThumb" name="thumbnail" placeholder="https://..." />
+          </div>
+          <div class="editor-group" style="margin-top:0.4rem;">
+            <img id="thumbPreview" src="" alt="" style="max-height:120px;object-fit:cover;display:none;margin-top:0.3rem;" />
+          </div>
+
+          <!-- Japanese -->
+          <p class="editor-section-title">日本語</p>
+          <div class="editor-group">
+            <label class="editor-label" for="fTitleJa">タイトル *</label>
+            <input class="editor-input" type="text" id="fTitleJa" name="title" required placeholder="記事タイトル" />
+          </div>
+          <div class="editor-group">
+            <label class="editor-label" for="fExcerptJa">抜粋（一覧表示用）</label>
+            <textarea class="editor-textarea" id="fExcerptJa" name="excerpt" rows="2" placeholder="記事の簡単な説明（80字程度）"></textarea>
+          </div>
+          <div class="editor-group">
+            <label class="editor-label">本文（日本語）</label>
+            <div class="rich-editor-wrap">
+              <div class="rich-toolbar" id="toolbarJa">
+                <button type="button" data-cmd="bold"          title="太字"><b>B</b></button>
+                <button type="button" data-cmd="italic"        title="斜体"><i>I</i></button>
+                <div class="tb-sep"></div>
+                <button type="button" data-cmd="h2"            title="見出し2">H2</button>
+                <button type="button" data-cmd="h3"            title="見出し3">H3</button>
+                <button type="button" data-cmd="p"             title="段落">¶</button>
+                <div class="tb-sep"></div>
+                <button type="button" data-cmd="ul"            title="リスト">•</button>
+                <button type="button" data-cmd="blockquote"    title="引用">"</button>
+                <button type="button" data-cmd="hr"            title="区切り線">—</button>
+                <div class="tb-sep"></div>
+                <button type="button" data-cmd="link"          title="リンク">🔗</button>
+                <button type="button" data-cmd="img"           title="画像">🖼</button>
+                <div class="tb-sep"></div>
+                <button type="button" data-cmd="removeFormat"  title="書式解除">✕</button>
+              </div>
+              <div class="rich-content" id="bodyJa" contenteditable="true" data-placeholder="本文を入力…（HTMLタグも使用可）"></div>
+            </div>
+          </div>
+
+          <!-- English -->
+          <p class="editor-section-title">英語（任意）</p>
+          <div class="editor-group">
+            <label class="editor-label" for="fTitleEn">Title (English)</label>
+            <input class="editor-input" type="text" id="fTitleEn" name="titleEn" placeholder="Article title in English" />
+          </div>
+          <div class="editor-group">
+            <label class="editor-label" for="fExcerptEn">Excerpt (English)</label>
+            <textarea class="editor-textarea" id="fExcerptEn" name="excerptEn" rows="2" placeholder="Short description in English"></textarea>
+          </div>
+          <div class="editor-group">
+            <label class="editor-label">Body (English)</label>
+            <div class="rich-editor-wrap">
+              <div class="rich-toolbar" id="toolbarEn">
+                <button type="button" data-cmd="bold"          title="Bold"><b>B</b></button>
+                <button type="button" data-cmd="italic"        title="Italic"><i>I</i></button>
+                <div class="tb-sep"></div>
+                <button type="button" data-cmd="h2"            title="Heading 2">H2</button>
+                <button type="button" data-cmd="h3"            title="Heading 3">H3</button>
+                <button type="button" data-cmd="p"             title="Paragraph">¶</button>
+                <div class="tb-sep"></div>
+                <button type="button" data-cmd="ul"            title="List">•</button>
+                <button type="button" data-cmd="blockquote"    title="Quote">"</button>
+                <button type="button" data-cmd="hr"            title="Divider">—</button>
+                <div class="tb-sep"></div>
+                <button type="button" data-cmd="link"          title="Link">🔗</button>
+                <button type="button" data-cmd="img"           title="Image">🖼</button>
+                <div class="tb-sep"></div>
+                <button type="button" data-cmd="removeFormat"  title="Clear">✕</button>
+              </div>
+              <div class="rich-content" id="bodyEn" contenteditable="true" data-placeholder="Body text in English…"></div>
+            </div>
+          </div>
+
+          <!-- Publish bar -->
+          <div class="editor-publish-bar">
+            <div class="editor-publish-bar__left">
+              <label class="toggle-label">
+                <span class="toggle-switch">
+                  <input type="checkbox" id="fPublished" name="published" />
+                  <span class="toggle-switch__track"></span>
+                  <span class="toggle-switch__thumb"></span>
+                </span>
+                公開する
+              </label>
+              <button type="button" class="editor-delete-btn" id="deleteBtn" style="display:none;">削除</button>
+            </div>
+            <div class="editor-actions">
+              <button type="submit" class="editor-save-btn">保存</button>
+            </div>
+          </div>
+
+        </form>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="editor-toast" id="toast"></div>
+
+  <script src="db.js"></script>
+  <script>
+  (function () {
+    // ── Auth ──
+    if (HALNIP_DB.isLoggedIn()) showAdmin();
+
+    document.getElementById('loginBtn').addEventListener('click', doLogin);
+    document.getElementById('loginInput').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+    function doLogin() {
+      const pw = document.getElementById('loginInput').value;
+      if (HALNIP_DB.checkPassword(pw)) {
+        HALNIP_DB.login();
+        showAdmin();
+      } else {
+        document.getElementById('loginErr').textContent = 'パスワードが違います';
+      }
+    }
+    function showAdmin() {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminPanel').style.display  = 'block';
+      renderSidebar();
+    }
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      HALNIP_DB.logout();
+      location.reload();
+    });
+
+    // ── State ──
+    let editingId = null;
+
+    // ── Sidebar ──
+    function renderSidebar() {
+      const filter = document.getElementById('sidebarFilter').value;
+      let posts = HALNIP_DB.getPosts().sort((a, b) => new Date(b.date) - new Date(a.date));
+      if (filter === 'published') posts = posts.filter(p => p.published);
+      if (filter === 'draft')     posts = posts.filter(p => !p.published);
+      const list = document.getElementById('adminPostList');
+      if (posts.length === 0) {
+        list.innerHTML = '<div style="padding:1.2rem;color:#aaa;font-size:0.8rem;text-align:center;">記事がありません</div>';
+        return;
+      }
+      list.innerHTML = posts.map(p => `
+        <div class="admin-post-item${editingId === p.id ? ' selected' : ''}" data-id="${p.id}">
+          <span class="admin-post-item__tag">${p.tag}</span>
+          <span class="admin-post-item__title">${p.title}</span>
+          <span class="admin-post-item__date">${p.date.replace(/-/g, '.')}</span>
+          ${!p.published ? '<span class="admin-post-item__draft">下書き</span>' : ''}
+        </div>`).join('');
+      list.querySelectorAll('.admin-post-item').forEach(item => {
+        item.addEventListener('click', () => loadPost(item.dataset.id));
+      });
+    }
+    document.getElementById('sidebarFilter').addEventListener('change', renderSidebar);
+
+    // ── New post ──
+    document.getElementById('newPostBtn').addEventListener('click', () => {
+      editingId = null;
+      clearForm();
+      document.getElementById('editorEmpty').style.display = 'none';
+      document.getElementById('editorForm').style.display  = '';
+      document.getElementById('deleteBtn').style.display   = 'none';
+      document.getElementById('fDate').value = new Date().toISOString().slice(0, 10);
+      document.getElementById('fPublished').checked = false;
+      renderSidebar();
+    });
+
+    // ── Load post into form ──
+    function loadPost(id) {
+      const post = HALNIP_DB.getPostById(id);
+      if (!post) return;
+      editingId = id;
+      document.getElementById('editorEmpty').style.display = 'none';
+      document.getElementById('editorForm').style.display  = '';
+      document.getElementById('deleteBtn').style.display   = 'inline-flex';
+
+      document.getElementById('fTag').value        = post.tag;
+      document.getElementById('fDate').value       = post.date;
+      document.getElementById('fThumb').value      = post.thumbnail || '';
+      document.getElementById('fTitleJa').value    = post.title;
+      document.getElementById('fExcerptJa').value  = post.excerpt || '';
+      document.getElementById('bodyJa').innerHTML  = post.body || '';
+      document.getElementById('fTitleEn').value    = post.titleEn || '';
+      document.getElementById('fExcerptEn').value  = post.excerptEn || '';
+      document.getElementById('bodyEn').innerHTML  = post.bodyEn || '';
+      document.getElementById('fPublished').checked = !!post.published;
+      updateThumbPreview(post.thumbnail);
+      renderSidebar();
+    }
+
+    function clearForm() {
+      ['fTag','fDate','fThumb','fTitleJa','fExcerptJa','fTitleEn','fExcerptEn'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el.tagName === 'SELECT') el.selectedIndex = 0;
+        else el.value = '';
+      });
+      document.getElementById('bodyJa').innerHTML = '';
+      document.getElementById('bodyEn').innerHTML = '';
+      document.getElementById('fPublished').checked = false;
+      updateThumbPreview('');
+    }
+
+    // ── Thumbnail preview ──
+    function updateThumbPreview(url) {
+      const img = document.getElementById('thumbPreview');
+      if (url) { img.src = url; img.style.display = 'block'; }
+      else      { img.src = ''; img.style.display = 'none'; }
+    }
+    document.getElementById('fThumb').addEventListener('input', e => updateThumbPreview(e.target.value));
+
+    // ── Save ──
+    document.getElementById('editorForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const title = document.getElementById('fTitleJa').value.trim();
+      if (!title) { showToast('タイトルを入力してください', true); return; }
+
+      const post = {
+        id:        editingId || HALNIP_DB.generateId(),
+        tag:       document.getElementById('fTag').value,
+        date:      document.getElementById('fDate').value,
+        thumbnail: document.getElementById('fThumb').value.trim(),
+        title,
+        titleEn:   document.getElementById('fTitleEn').value.trim(),
+        excerpt:   document.getElementById('fExcerptJa').value.trim(),
+        excerptEn: document.getElementById('fExcerptEn').value.trim(),
+        body:      document.getElementById('bodyJa').innerHTML,
+        bodyEn:    document.getElementById('bodyEn').innerHTML,
+        published: document.getElementById('fPublished').checked
+      };
+
+      HALNIP_DB.savePost(post);
+      editingId = post.id;
+      document.getElementById('deleteBtn').style.display = 'inline-flex';
+      renderSidebar();
+      showToast('保存しました ✓');
+    });
+
+    // ── Delete ──
+    document.getElementById('deleteBtn').addEventListener('click', () => {
+      if (!editingId) return;
+      if (!confirm('この記事を削除しますか？')) return;
+      HALNIP_DB.deletePost(editingId);
+      editingId = null;
+      clearForm();
+      document.getElementById('editorForm').style.display  = 'none';
+      document.getElementById('editorEmpty').style.display = '';
+      renderSidebar();
+      showToast('削除しました');
+    });
+
+    // ── Export / Import ──
+    document.getElementById('exportBtn').addEventListener('click', () => {
+      const blob = new Blob([HALNIP_DB.exportJSON()], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'halnip-journal-' + new Date().toISOString().slice(0,10) + '.json';
+      a.click();
+    });
+    document.getElementById('importBtnTrigger').addEventListener('click', () => document.getElementById('importFile').click());
+    document.getElementById('importFile').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          HALNIP_DB.importJSON(ev.target.result);
+          editingId = null;
+          document.getElementById('editorForm').style.display  = 'none';
+          document.getElementById('editorEmpty').style.display = '';
+          renderSidebar();
+          showToast('インポートしました ✓');
+        } catch { showToast('JSONの読み込みに失敗しました', true); }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+
+    // ── Rich text editor ──
+    function initToolbar(toolbarId, editorId) {
+      const toolbar = document.getElementById(toolbarId);
+      const editor  = document.getElementById(editorId);
+
+      toolbar.querySelectorAll('button[data-cmd]').forEach(btn => {
+        btn.addEventListener('mousedown', e => {
+          e.preventDefault();
+          editor.focus();
+          const cmd = btn.dataset.cmd;
+
+          if (cmd === 'h2' || cmd === 'h3' || cmd === 'p') {
+            document.execCommand('formatBlock', false, '<' + cmd + '>');
+          } else if (cmd === 'ul') {
+            document.execCommand('insertUnorderedList');
+          } else if (cmd === 'blockquote') {
+            document.execCommand('formatBlock', false, '<blockquote>');
+          } else if (cmd === 'hr') {
+            document.execCommand('insertHTML', false, '<hr>');
+          } else if (cmd === 'link') {
+            const url = prompt('URL を入力:');
+            if (url) document.execCommand('createLink', false, url);
+          } else if (cmd === 'img') {
+            const url = prompt('画像 URL を入力:');
+            if (url) document.execCommand('insertHTML', false, `<img src="${url}" alt="" style="max-width:100%;" />`);
+          } else {
+            document.execCommand(cmd);
+          }
+
+          // Update active states
+          toolbar.querySelectorAll('button[data-cmd]').forEach(b => {
+            const c = b.dataset.cmd;
+            b.classList.toggle('active',
+              c === 'bold'   ? document.queryCommandState('bold')   :
+              c === 'italic' ? document.queryCommandState('italic') : false
+            );
+          });
+        });
+      });
+    }
+
+    initToolbar('toolbarJa', 'bodyJa');
+    initToolbar('toolbarEn', 'bodyEn');
+
+    // ── Toast ──
+    function showToast(msg, isError) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className   = 'editor-toast show' + (isError ? ' error' : '');
+      setTimeout(() => { t.className = 'editor-toast'; }, 2800);
+    }
+
+  })();
+  </script>
+</body>
+</html>

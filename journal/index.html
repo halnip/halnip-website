@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RELEASE &amp; JOURNAL | HALNIP株式会社</title>
+  <meta name="description" content="HALNIPの最新情報・ジャーナル。" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="journal.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600&family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="subpage">
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav__logo">
+      <a href="../index.html" class="nav__logo-link">
+        <img src="../images/Halnip_Green.png" alt="HALNIP" class="nav__logo-img"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" />
+        <span class="nav__logo-text-fallback" style="display:none;">HALNIP</span>
+      </a>
+    </div>
+    <button class="nav__hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="../index.html#home">HOME</a></li>
+      <li><a href="../index.html#about">ABOUT</a></li>
+      <li><a href="../index.html#brand">OUR BRAND</a></li>
+      <li><a href="index.html">RELEASE &amp; JOURNAL</a></li>
+      <li><a href="../index.html#contact">CONTACT</a></li>
+      <li class="nav__lang"><button id="langToggle" class="lang-btn">EN</button></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero__inner container">
+      <p class="page-hero__label section-label" data-ja="RELEASE &amp; JOURNAL" data-en="RELEASE &amp; JOURNAL">RELEASE &amp; JOURNAL</p>
+      <h1 class="page-hero__title" data-ja="最新情報" data-en="Latest News">最新情報</h1>
+    </div>
+  </section>
+
+  <!-- JOURNAL LIST -->
+  <section class="journal-list">
+    <div class="container">
+
+      <!-- Filter -->
+      <div class="journal-filter">
+        <button class="filter-btn active" data-filter="all" data-ja="すべて" data-en="ALL">すべて</button>
+        <button class="filter-btn" data-filter="RELEASE" data-ja="リリース" data-en="RELEASE">リリース</button>
+        <button class="filter-btn" data-filter="JOURNAL" data-ja="ジャーナル" data-en="JOURNAL">ジャーナル</button>
+      </div>
+
+      <!-- Grid (populated by JS) -->
+      <div class="journal-grid" id="journalGrid">
+        <div class="journal-grid--empty" data-ja="記事を読み込み中…" data-en="Loading…">記事を読み込み中…</div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="journal-pagination" id="pagination"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <img src="../images/Halnip_Green.png" alt="HALNIP" class="footer__logo-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+            <span class="footer__logo-text-fallback" style="display:none;">HALNIP</span>
+          </div>
+          <p class="footer__tagline">Bridging Cultures Beyond Borders</p>
+          <p class="footer__company">ハルニップ株式会社</p>
+        </div>
+        <nav class="footer__nav">
+          <ul>
+            <li><a href="../index.html#home">HOME</a></li>
+            <li><a href="../index.html#about">ABOUT</a></li>
+            <li><a href="../index.html#brand">OUR BRAND</a></li>
+            <li><a href="index.html">RELEASE &amp; JOURNAL</a></li>
+            <li><a href="../index.html#contact">CONTACT</a></li>
+          </ul>
+          <ul>
+            <li><a href="../company.html">会社概要</a></li>
+            <li><a href="../privacy.html">プライバシーポリシー</a></li>
+            <li><a href="admin.html" style="opacity:0.35;font-size:0.75em;">管理</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 HALNIP Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="db.js"></script>
+  <script>
+  (function () {
+    // ── State ──
+    let currentLang   = 'ja';
+    let currentFilter = 'all';
+    let currentPage   = 1;
+    const PER_PAGE    = 9;
+
+    // ── Lang ──
+    function applyLang(lang) {
+      document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+        const v = el.getAttribute('data-' + lang);
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = v;
+        else el.innerHTML = v;
+      });
+      document.documentElement.lang = lang;
+      document.getElementById('langToggle').textContent = lang === 'ja' ? 'EN' : 'JA';
+    }
+    document.getElementById('langToggle').addEventListener('click', () => {
+      currentLang = currentLang === 'ja' ? 'en' : 'ja';
+      applyLang(currentLang);
+      render();
+    });
+
+    // ── Format date ──
+    function fmtDate(d) {
+      return d.replace(/-/g, '.');
+    }
+
+    // ── Build card HTML ──
+    function cardHTML(post) {
+      const tagLabel = post.tag === 'RELEASE'
+        ? (currentLang === 'ja' ? 'リリース' : 'RELEASE')
+        : (currentLang === 'ja' ? 'ジャーナル' : 'JOURNAL');
+      const title   = currentLang === 'ja' ? post.title   : (post.titleEn   || post.title);
+      const excerpt = currentLang === 'ja' ? post.excerpt : (post.excerptEn || post.excerpt);
+      return `
+        <article class="j-card reveal">
+          <a href="post.html?id=${post.id}" class="j-card__link">
+            <div class="j-card__img-wrap">
+              <img class="j-card__img" src="${post.thumbnail}" alt="${title}"
+                onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80'" loading="lazy" />
+              <span class="j-card__tag j-card__tag--${post.tag.toLowerCase()}">${tagLabel}</span>
+            </div>
+            <div class="j-card__body">
+              <time class="j-card__date" datetime="${post.date}">${fmtDate(post.date)}</time>
+              <h2 class="j-card__title">${title}</h2>
+              <p class="j-card__excerpt">${excerpt}</p>
+            </div>
+          </a>
+        </article>`;
+    }
+
+    // ── Render grid ──
+    function render() {
+      const all   = HALNIP_DB.getPublishedPosts();
+      const filt  = currentFilter === 'all' ? all : all.filter(p => p.tag === currentFilter);
+      const total = filt.length;
+      const pages = Math.ceil(total / PER_PAGE);
+      currentPage = Math.min(currentPage, pages || 1);
+      const slice = filt.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
+
+      const grid = document.getElementById('journalGrid');
+      if (slice.length === 0) {
+        grid.innerHTML = `<div class="journal-grid--empty">${currentLang === 'ja' ? '記事がありません' : 'No articles found'}</div>`;
+      } else {
+        grid.innerHTML = slice.map(cardHTML).join('');
+        // Scroll reveal
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      }
+
+      // Pagination
+      const pag = document.getElementById('pagination');
+      if (pages <= 1) { pag.innerHTML = ''; return; }
+      let html = '';
+      if (currentPage > 1) html += `<button class="page-btn" data-page="${currentPage - 1}">&#8592;</button>`;
+      for (let i = 1; i <= pages; i++) {
+        html += `<button class="page-btn${i === currentPage ? ' active' : ''}" data-page="${i}">${i}</button>`;
+      }
+      if (currentPage < pages) html += `<button class="page-btn" data-page="${currentPage + 1}">&#8594;</button>`;
+      pag.innerHTML = html;
+      pag.querySelectorAll('.page-btn').forEach(btn => {
+        btn.addEventListener('click', () => { currentPage = +btn.dataset.page; render(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      });
+    }
+
+    // ── Filter buttons ──
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        currentPage = 1;
+        render();
+      });
+    });
+
+    // ── Hamburger ──
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hamburger.classList.remove('open'); navLinks.classList.remove('open'); }));
+
+    // ── Init ──
+    render();
+  })();
+  </script>
+
+</body>
+</html>

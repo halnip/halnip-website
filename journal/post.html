@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>記事 | HALNIP</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="journal.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600&family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="subpage post-page">
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav__logo">
+      <a href="../index.html" class="nav__logo-link">
+        <img src="../images/Halnip_Green.png" alt="HALNIP" class="nav__logo-img"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" />
+        <span class="nav__logo-text-fallback" style="display:none;">HALNIP</span>
+      </a>
+    </div>
+    <button class="nav__hamburger" id="hamburger" aria-label="メニュー"><span></span><span></span><span></span></button>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="../index.html#home">HOME</a></li>
+      <li><a href="../index.html#about">ABOUT</a></li>
+      <li><a href="../index.html#brand">OUR BRAND</a></li>
+      <li><a href="index.html">RELEASE &amp; JOURNAL</a></li>
+      <li><a href="../index.html#contact">CONTACT</a></li>
+      <li class="nav__lang"><button id="langToggle" class="lang-btn">EN</button></li>
+    </ul>
+  </nav>
+
+  <!-- POST HERO (populated by JS) -->
+  <section class="post-hero" id="postHero">
+    <div class="post-hero__inner container">
+      <span class="post-hero__tag" id="postTag"></span>
+      <time class="post-hero__date" id="postDate"></time>
+      <h1 class="post-hero__title" id="postTitle"></h1>
+    </div>
+    <img class="post-hero__thumb" id="postThumb" src="" alt="" />
+  </section>
+
+  <!-- POST BODY -->
+  <div class="post-body-wrap">
+    <div class="container">
+      <div class="post-body" id="postBody"></div>
+      <nav class="post-nav">
+        <a href="index.html" class="post-nav__back">← RELEASE &amp; JOURNAL 一覧</a>
+        <div style="display:flex;gap:1.5rem;">
+          <a href="#" class="post-nav__link" id="prevLink" style="display:none;">← PREV</a>
+          <a href="#" class="post-nav__link" id="nextLink" style="display:none;">NEXT →</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <img src="../images/Halnip_Green.png" alt="HALNIP" class="footer__logo-img"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+            <span class="footer__logo-text-fallback" style="display:none;">HALNIP</span>
+          </div>
+          <p class="footer__tagline">Bridging Cultures Beyond Borders</p>
+          <p class="footer__company">ハルニップ株式会社</p>
+        </div>
+        <nav class="footer__nav">
+          <ul>
+            <li><a href="../index.html#home">HOME</a></li>
+            <li><a href="../index.html#about">ABOUT</a></li>
+            <li><a href="../index.html#brand">OUR BRAND</a></li>
+            <li><a href="index.html">RELEASE &amp; JOURNAL</a></li>
+            <li><a href="../index.html#contact">CONTACT</a></li>
+          </ul>
+          <ul>
+            <li><a href="../company.html">会社概要</a></li>
+            <li><a href="../privacy.html">プライバシーポリシー</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2026 HALNIP Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="db.js"></script>
+  <script>
+  (function () {
+    let currentLang = 'ja';
+
+    // ── Get post ID from URL ──
+    const params = new URLSearchParams(location.search);
+    const id     = params.get('id');
+    const post   = id ? HALNIP_DB.getPostById(id) : null;
+
+    if (!post || !post.published) {
+      document.getElementById('postTitle').textContent = '記事が見つかりませんでした';
+      document.getElementById('postBody').innerHTML = '<p><a href="index.html">← 一覧へ戻る</a></p>';
+    } else {
+      // Set page title
+      document.title = post.title + ' | HALNIP';
+
+      function renderPost(lang) {
+        const title = lang === 'ja' ? post.title : (post.titleEn || post.title);
+        const body  = lang === 'ja' ? post.body  : (post.bodyEn  || post.body);
+        const tagLabel = post.tag === 'RELEASE'
+          ? (lang === 'ja' ? 'RELEASE' : 'RELEASE')
+          : (lang === 'ja' ? 'JOURNAL' : 'JOURNAL');
+
+        document.getElementById('postTag').textContent   = tagLabel;
+        document.getElementById('postTag').className     = 'post-hero__tag post-hero__tag--' + post.tag.toLowerCase();
+        document.getElementById('postDate').textContent  = post.date.replace(/-/g, '.');
+        document.getElementById('postDate').setAttribute('datetime', post.date);
+        document.getElementById('postTitle').textContent = title;
+        document.getElementById('postThumb').src         = post.thumbnail;
+        document.getElementById('postThumb').alt         = title;
+        document.getElementById('postBody').innerHTML    = body;
+      }
+      renderPost(currentLang);
+
+      // ── Prev / Next ──
+      const all = HALNIP_DB.getPublishedPosts();
+      const idx = all.findIndex(p => p.id === post.id);
+      if (idx > 0) {
+        const prev = all[idx - 1];
+        const prevLink = document.getElementById('prevLink');
+        prevLink.style.display = 'inline';
+        prevLink.href = 'post.html?id=' + prev.id;
+      }
+      if (idx < all.length - 1) {
+        const next = all[idx + 1];
+        const nextLink = document.getElementById('nextLink');
+        nextLink.style.display = 'inline';
+        nextLink.href = 'post.html?id=' + next.id;
+      }
+
+      // ── Lang toggle ──
+      document.getElementById('langToggle').addEventListener('click', () => {
+        currentLang = currentLang === 'ja' ? 'en' : 'ja';
+        document.getElementById('langToggle').textContent = currentLang === 'ja' ? 'EN' : 'JA';
+        document.documentElement.lang = currentLang;
+        renderPost(currentLang);
+      });
+    }
+
+    // ── Nav ──
+    const hamburger = document.getElementById('hamburger');
+    const navLinks  = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); navLinks.classList.toggle('open'); });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hamburger.classList.remove('open'); navLinks.classList.remove('open'); }));
+  })();
+  </script>
+
+</body>
+</html>
