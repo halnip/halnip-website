@@ -180,55 +180,8 @@
       <div class="journal__label section-label" data-en="RELEASE &amp; JOURNAL" data-ja="最新情報">RELEASE &amp; JOURNAL</div>
       <h2 class="journal__title" data-en="Latest News" data-ja="最新情報">Latest News</h2>
 
-      <div class="journal__grid">
-        <!-- Article 1 — Replace content as needed -->
-        <article class="journal__card">
-          <a href="journal/article-01.html" class="journal__card-link">
-            <div class="journal__card-img-wrap">
-              <!-- Replace with actual article thumbnail -->
-              <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80" alt="記事サムネイル" class="journal__card-img" />
-              <span class="journal__card-tag" data-en="RELEASE" data-ja="リリース">RELEASE</span>
-            </div>
-            <div class="journal__card-body">
-              <time class="journal__card-date" datetime="2025-05-01">2025.05.01</time>
-              <h3 class="journal__card-title" data-en="SENSETIER officially launched in Malaysia" data-ja="SENSETIERがマレーシアで正式ローンチ">SENSETIERがマレーシアで正式ローンチ</h3>
-              <p class="journal__card-excerpt" data-en="Our flagship brand SENSETIER has officially launched in Malaysia..." data-ja="自社ブランドSENSETIERが、マレーシア市場にて正式にローンチしました…">自社ブランドSENSETIERが、マレーシア市場にて正式にローンチしました…</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- Article 2 -->
-        <article class="journal__card">
-          <a href="journal/article-02.html" class="journal__card-link">
-            <div class="journal__card-img-wrap">
-              <!-- Replace with actual article thumbnail -->
-              <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=600&q=80" alt="記事サムネイル" class="journal__card-img" />
-              <span class="journal__card-tag" data-en="JOURNAL" data-ja="ジャーナル">JOURNAL</span>
-            </div>
-            <div class="journal__card-body">
-              <time class="journal__card-date" datetime="2025-04-15">2025.04.15</time>
-              <h3 class="journal__card-title" data-en="Muslim market insight: What resonates with Southeast Asian consumers" data-ja="ムスリム市場インサイト：東南アジア消費者に響くものとは">ムスリム市場インサイト：東南アジア消費者に響くものとは</h3>
-              <p class="journal__card-excerpt" data-en="We share our findings from field research across Malaysia and Indonesia..." data-ja="マレーシア・インドネシアでのフィールドリサーチから見えてきた知見を共有します…">マレーシア・インドネシアでのフィールドリサーチから見えてきた知見を共有します…</p>
-            </div>
-          </a>
-        </article>
-
-        <!-- Article 3 -->
-        <article class="journal__card">
-          <a href="journal/article-03.html" class="journal__card-link">
-            <div class="journal__card-img-wrap">
-              <!-- Replace with actual article thumbnail -->
-              <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" alt="記事サムネイル" class="journal__card-img" />
-              <span class="journal__card-tag" data-en="RELEASE" data-ja="リリース">RELEASE</span>
-            </div>
-            <div class="journal__card-body">
-              <time class="journal__card-date" datetime="2025-03-20">2025.03.20</time>
-              <h3 class="journal__card-title" data-en="HALNIP Co., Ltd. officially established" data-ja="ハルニップ株式会社、正式設立のご報告">ハルニップ株式会社、正式設立のご報告</h3>
-              <p class="journal__card-excerpt" data-en="We are pleased to announce the official establishment of HALNIP Co., Ltd..." data-ja="この度、ハルニップ株式会社が正式に設立されました。日本とムスリム市場を繋ぐ…">この度、ハルニップ株式会社が正式に設立されました。日本とムスリム市場を繋ぐ…</p>
-            </div>
-          </a>
-        </article>
-      </div>
+      <!-- 動的に生成（journal/db.js より最新3件） -->
+      <div class="journal__grid" id="topJournalGrid"></div>
 
       <div class="journal__more">
         <a href="journal/index.html" class="btn btn--outline" data-en="View All →" data-ja="すべて見る →">すべて見る →</a>
@@ -326,8 +279,46 @@
     </div>
   </footer>
 
+  <script src="journal/db.js"></script>
   <script src="main.js"></script>
   <script>
+  // =============================================
+  // TOP JOURNAL — 最新3件を動的生成
+  // =============================================
+  (function() {
+    const grid = document.getElementById('topJournalGrid');
+    if (!grid || typeof HALNIP_DB === 'undefined') return;
+
+    const posts = HALNIP_DB.getPublishedPosts().slice(0, 3);
+    if (posts.length === 0) return;
+
+    grid.innerHTML = posts.map(post => {
+      const tagLabel = post.tag === 'RELEASE' ? 'RELEASE' : 'JOURNAL';
+      const date     = post.date.replace(/-/g, '.');
+      return `
+        <article class="journal__card reveal">
+          <a href="journal/post.html?id=${post.id}" class="journal__card-link">
+            <div class="journal__card-img-wrap">
+              <img src="${post.thumbnail}" alt="${post.title}" class="journal__card-img"
+                onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80'" loading="lazy" />
+              <span class="journal__card-tag"
+                data-ja="${post.tag === 'RELEASE' ? 'リリース' : 'ジャーナル'}"
+                data-en="${tagLabel}">${post.tag === 'RELEASE' ? 'リリース' : 'ジャーナル'}</span>
+            </div>
+            <div class="journal__card-body">
+              <time class="journal__card-date" datetime="${post.date}">${date}</time>
+              <h3 class="journal__card-title"
+                data-ja="${post.title}"
+                data-en="${post.titleEn || post.title}">${post.title}</h3>
+              <p class="journal__card-excerpt"
+                data-ja="${post.excerpt || ''}"
+                data-en="${post.excerptEn || post.excerpt || ''}">${post.excerpt || ''}</p>
+            </div>
+          </a>
+        </article>`;
+    }).join('');
+  })();
+
   // =============================================
   // HERO ANIMATION SEQUENCE
   // Phase 1: HALAL × NIPPON letters appear (バババッ)
