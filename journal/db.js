@@ -49,12 +49,20 @@ const HALNIP_DB = (function () {
   ];
 
   function _load() {
-    try { const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : null; }
-    catch { return null; }
+    try {
+      const r = localStorage.getItem(KEY);
+      if (r === null) return null;          // 未初期化
+      const parsed = JSON.parse(r);
+      return Array.isArray(parsed) ? parsed : null;
+    } catch { return null; }
   }
   function _save(posts) { localStorage.setItem(KEY, JSON.stringify(posts)); }
 
-  function getPosts()          { return _load() || (_save(SEED), SEED); }
+  function getPosts() {
+    const loaded = _load();
+    if (loaded === null) { _save(SEED); return SEED; }  // 初回 or 破損 → シード
+    return loaded;
+  }
   function getPublishedPosts() { return getPosts().filter(p => p.published).sort((a, b) => new Date(b.date) - new Date(a.date)); }
   function getPostById(id)     { return getPosts().find(p => p.id === id) || null; }
 
@@ -73,6 +81,7 @@ const HALNIP_DB = (function () {
 
   function exportJSON()       { return JSON.stringify(getPosts(), null, 2); }
   function importJSON(json)   { _save(JSON.parse(json)); }
+  function resetToSeed()      { _save(SEED); }
 
-  return { getPosts, getPublishedPosts, getPostById, savePost, deletePost, generateId, checkPassword, isLoggedIn, login, logout, exportJSON, importJSON };
+  return { getPosts, getPublishedPosts, getPostById, savePost, deletePost, generateId, checkPassword, isLoggedIn, login, logout, exportJSON, importJSON, resetToSeed };
 })();

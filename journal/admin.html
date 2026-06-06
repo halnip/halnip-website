@@ -226,7 +226,14 @@
       if (filter === 'draft')     posts = posts.filter(p => !p.published);
       const list = document.getElementById('adminPostList');
       if (posts.length === 0) {
-        list.innerHTML = '<div style="padding:1.2rem;color:#aaa;font-size:0.8rem;text-align:center;">記事がありません</div>';
+        list.innerHTML = `
+          <div style="padding:1.2rem;text-align:center;">
+            <p style="color:#aaa;font-size:0.8rem;margin-bottom:0.8rem;">記事がありません</p>
+            <button onclick="HALNIP_DB.resetToSeed();location.reload();"
+              style="font-size:0.7rem;padding:0.4em 0.8em;border:1px solid #c9a96e;color:#9a7a40;background:transparent;cursor:pointer;letter-spacing:0.1em;">
+              サンプルを読み込む
+            </button>
+          </div>`;
         return;
       }
       list.innerHTML = posts.map(p => `
