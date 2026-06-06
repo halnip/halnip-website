@@ -187,6 +187,9 @@
   <script src="db.js"></script>
   <script>
   (function () {
+    // ── State（先に宣言しないと isLoggedIn → showAdmin → renderSidebar でTDZエラーになる） ──
+    let editingId = null;
+
     // ── Auth ──
     if (HALNIP_DB.isLoggedIn()) showAdmin();
 
@@ -215,8 +218,7 @@
       document.getElementById('loginErr').textContent = '';
     });
 
-    // ── State ──
-    let editingId = null;
+    // ── State（上部に移動済み） ──
 
     // ── Sidebar ──
     function renderSidebar() {
