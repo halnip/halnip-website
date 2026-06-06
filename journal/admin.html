@@ -236,13 +236,18 @@
           </div>`;
         return;
       }
-      list.innerHTML = posts.map(p => `
-        <div class="admin-post-item${editingId === p.id ? ' selected' : ''}" data-id="${p.id}">
-          <span class="admin-post-item__tag">${p.tag}</span>
-          <span class="admin-post-item__title">${p.title}</span>
-          <span class="admin-post-item__date">${p.date.replace(/-/g, '.')}</span>
-          ${!p.published ? '<span class="admin-post-item__draft">下書き</span>' : ''}
-        </div>`).join('');
+      try {
+        list.innerHTML = posts.map(p => `
+          <div class="admin-post-item${editingId === p.id ? ' selected' : ''}" data-id="${p.id || ''}">
+            <span class="admin-post-item__tag">${p.tag || ''}</span>
+            <span class="admin-post-item__title">${p.title || '（無題）'}</span>
+            <span class="admin-post-item__date">${(p.date || '').replace(/-/g, '.')}</span>
+            ${!p.published ? '<span class="admin-post-item__draft">下書き</span>' : ''}
+          </div>`).join('');
+      } catch(e) {
+        list.innerHTML = '<div style="padding:1rem;color:#c0392b;font-size:0.8rem;">データ読み込みエラー。<br><button onclick="localStorage.removeItem(\'halnip_journal_posts\');location.reload();" style="margin-top:0.5rem;padding:0.3em 0.8em;border:1px solid #c0392b;color:#c0392b;background:transparent;cursor:pointer;">リセット</button></div>';
+        return;
+      }
       list.querySelectorAll('.admin-post-item').forEach(item => {
         item.addEventListener('click', () => loadPost(item.dataset.id));
       });
