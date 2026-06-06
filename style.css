@@ -325,13 +325,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .hero__letter.fading {
-  animation: fadeLetterOut 0.45s ease forwards;
+  animation: fadeLetterOut 0.9s ease-out forwards;
 }
 .hero__cross.fading .hero__letter {
-  animation: fadeLetterOut 0.45s ease forwards;
+  animation: fadeLetterOut 0.9s ease-out forwards;
 }
 @keyframes fadeLetterOut {
-  to { opacity: 0; transform: scale(0.7); }
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.88); }
 }
 
 /* ── Hero Merge Stage (Phase 3) ── */
