@@ -452,7 +452,7 @@
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.05 });
     revealEls.forEach(el => { el.classList.add('reveal'); io.observe(el); });
   })();
 

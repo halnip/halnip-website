@@ -411,7 +411,7 @@
         setTimeout(() => e.target.classList.add('bc-revealed'), delay);
         io.unobserve(e.target);
       });
-    }, {threshold: 0.08});
+    }, {threshold: 0.05});
     document.querySelectorAll('.bc-reveal').forEach(el => io.observe(el));
   })();
   </script>

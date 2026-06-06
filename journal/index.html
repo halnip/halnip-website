@@ -167,7 +167,7 @@
         // Scroll reveal
         const io = new IntersectionObserver(entries => {
           entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); } });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.05 });
         grid.querySelectorAll('.reveal').forEach(el => io.observe(el));
       }
 
