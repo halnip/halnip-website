@@ -112,8 +112,11 @@
                 <button type="button" data-cmd="img"           title="画像">🖼</button>
                 <div class="tb-sep"></div>
                 <button type="button" data-cmd="removeFormat"  title="書式解除">✕</button>
+                <div class="tb-sep"></div>
+                <button type="button" class="tb-html-toggle" data-target="bodyJa" title="HTMLソースを表示・編集">&lt;/&gt;</button>
               </div>
               <div class="rich-content" id="bodyJa" contenteditable="true" data-placeholder="本文を入力…（HTMLタグも使用可）"></div>
+              <textarea class="rich-html-source" id="bodyJaHtml" placeholder="HTMLを直接入力…" style="display:none;"></textarea>
             </div>
           </div>
 
@@ -146,8 +149,11 @@
                 <button type="button" data-cmd="img"           title="Image">🖼</button>
                 <div class="tb-sep"></div>
                 <button type="button" data-cmd="removeFormat"  title="Clear">✕</button>
+                <div class="tb-sep"></div>
+                <button type="button" class="tb-html-toggle" data-target="bodyEn" title="Show/edit HTML source">&lt;/&gt;</button>
               </div>
               <div class="rich-content" id="bodyEn" contenteditable="true" data-placeholder="Body text in English…"></div>
+              <textarea class="rich-html-source" id="bodyEnHtml" placeholder="Enter HTML directly…" style="display:none;"></textarea>
             </div>
           </div>
 
@@ -306,8 +312,12 @@
         titleEn:   document.getElementById('fTitleEn').value.trim(),
         excerpt:   document.getElementById('fExcerptJa').value.trim(),
         excerptEn: document.getElementById('fExcerptEn').value.trim(),
-        body:      document.getElementById('bodyJa').innerHTML,
-        bodyEn:    document.getElementById('bodyEn').innerHTML,
+        body:      document.getElementById('bodyJaHtml').style.display !== 'none'
+                     ? document.getElementById('bodyJaHtml').value
+                     : document.getElementById('bodyJa').innerHTML,
+        bodyEn:    document.getElementById('bodyEnHtml').style.display !== 'none'
+                     ? document.getElementById('bodyEnHtml').value
+                     : document.getElementById('bodyEn').innerHTML,
         published: document.getElementById('fPublished').checked
       };
 
@@ -401,6 +411,38 @@
 
     initToolbar('toolbarJa', 'bodyJa');
     initToolbar('toolbarEn', 'bodyEn');
+
+    // ── HTML ソース切替 ──
+    document.querySelectorAll('.tb-html-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId  = btn.dataset.target;                  // bodyJa / bodyEn
+        const visual    = document.getElementById(targetId);
+        const source    = document.getElementById(targetId + 'Html');
+        const toolbar   = btn.closest('.rich-toolbar');
+        const isHtml    = source.style.display !== 'none';
+
+        if (isHtml) {
+          // HTML → ビジュアルに戻す
+          visual.innerHTML = source.value;
+          visual.style.display = '';
+          source.style.display = 'none';
+          // ツールバーの他ボタンを有効化
+          toolbar.querySelectorAll('button:not(.tb-html-toggle)').forEach(b => b.disabled = false);
+          btn.classList.remove('active');
+          btn.title = targetId === 'bodyJa' ? 'HTMLソースを表示・編集' : 'Show/edit HTML source';
+        } else {
+          // ビジュアル → HTML ソースへ
+          source.value = visual.innerHTML;
+          visual.style.display = 'none';
+          source.style.display = '';
+          source.focus();
+          // ツールバーの他ボタンを無効化
+          toolbar.querySelectorAll('button:not(.tb-html-toggle)').forEach(b => b.disabled = true);
+          btn.classList.add('active');
+          btn.title = targetId === 'bodyJa' ? 'ビジュアル編集に戻す' : 'Back to visual editor';
+        }
+      });
+    });
 
     // ── Toast ──
     function showToast(msg, isError) {
