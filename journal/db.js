@@ -3,6 +3,8 @@
    ============================================== */
 const HALNIP_DB = (function () {
   const KEY           = 'halnip_journal_posts';
+  const VERSION_KEY   = 'halnip_journal_seed_version';
+  const SEED_VERSION  = '2026-06-07-02';   // ← SEED更新時にここを書き換える（旧キャッシュを自動上書き）
   const SESSION_KEY   = 'halnip_admin_session';
   const ADMIN_PASS    = 'HnImanon21'; // ← 変更可
 
@@ -46,8 +48,18 @@ const HALNIP_DB = (function () {
   function _save(posts) { localStorage.setItem(KEY, JSON.stringify(posts)); }
 
   function getPosts() {
+    // SEEDバージョンが更新されていれば、ローカルキャッシュを強制的に上書き
+    const cachedVersion = localStorage.getItem(VERSION_KEY);
+    if (cachedVersion !== SEED_VERSION) {
+      _save(SEED);
+      localStorage.setItem(VERSION_KEY, SEED_VERSION);
+      return SEED;
+    }
     const loaded = _load();
-    if (loaded === null) { _save(SEED); return SEED; }  // 初回 or 破損 → シード
+    if (loaded === null) {
+      _save(SEED);
+      return SEED;
+    }
     return loaded;
   }
   function getPublishedPosts() { return getPosts().filter(p => p.published).sort((a, b) => new Date(b.date) - new Date(a.date)); }
