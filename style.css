@@ -516,6 +516,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-bottom: clamp(3rem, 6vw, 5rem);
   gap: clamp(1.5rem, 3vw, 2.5rem);
 }
+/* ロゴ直下のタグラインだけ余白を詰める */
+.brand__logo-wrap + .brand__tagline {
+  margin-top: clamp(-1rem, -1.5vw, -0.6rem);
+}
 
 /* Logo wrap — ホバーなし・リンクなし */
 .brand__logo-wrap {
