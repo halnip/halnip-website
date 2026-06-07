@@ -33,25 +33,39 @@
   </nav>
 
   <!-- ============================================================
-       01  HERO — 全画面キービジュアル
+       01  HERO — 左：テキスト＋アニメーション ／ 右：ビジュアル
   ============================================================ -->
-  <section class="bc-hero">
-    <div class="bc-hero__bg">
-      <img src="images/MODEL_A.jpg" alt="SENSETIER"
-        onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80'" />
-      <div class="bc-hero__grain"></div>
-      <div class="bc-hero__overlay"></div>
+  <section class="bc-hero bc-hero--split">
+
+    <!-- 左：テキスト -->
+    <div class="bc-hero__left">
+      <p class="bc-hero__eyebrow">
+        <span class="bc-hero__eyebrow-line"></span>
+        Brand Story
+      </p>
+
+      <h1 class="bc-hero__title">
+        <span class="bc-hero__title-line"><span class="bc-hero__title-inner" style="--d:.10s">自分の機嫌は</span></span>
+        <span class="bc-hero__title-line"><span class="bc-hero__title-inner" style="--d:.30s">自分でとる。</span></span>
+      </h1>
+
+      <div class="bc-hero__brand-wrap">
+        <span class="bc-hero__brand-line"></span>
+        <span class="bc-hero__brand-name" style="--d:.70s">SENSETIER</span>
+      </div>
+
+      <p class="bc-hero__sub" style="--d:.85s">
+        感情の波を克服し、自身を調律する新習慣
+      </p>
     </div>
 
-    <div class="bc-hero__content">
-      <p class="bc-hero__eyebrow">Brand Story</p>
-      <h1 class="bc-hero__title">
-        <span class="bc-hero__title-line" style="--d:.05s">自分の機嫌は</span>
-        <span class="bc-hero__title-line" style="--d:.18s">自分でとる。</span>
-      </h1>
-      <p class="bc-hero__sub" style="--d:.38s">
-        SENSETIER — 感情の波を克服し、自身を調律する新習慣
-      </p>
+    <!-- 右：画像 -->
+    <div class="bc-hero__right">
+      <div class="bc-hero__img-wrap">
+        <img src="https://raw.githubusercontent.com/halnip/halnip-website/main/images/IMG_7095_b.jpg" alt="SENSETIER"
+          onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&q=85'" />
+        <div class="bc-hero__img-veil"></div>
+      </div>
     </div>
 
     <div class="bc-hero__scroll">
