@@ -8,32 +8,6 @@ const HALNIP_DB = (function () {
 
   const SEED = [
     {
-      id: 'seed_001',
-      tag: 'RELEASE',
-      date: '2025-05-01',
-      title: 'SENSETIERがマレーシアで正式ローンチ',
-      titleEn: 'SENSETIER officially launched in Malaysia',
-      thumbnail: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&q=80',
-      excerpt: '自社ブランドSENSETIERが、マレーシア市場にて正式にローンチしました。',
-      excerptEn: 'Our flagship brand SENSETIER has officially launched in Malaysia.',
-      body: '<p>自社ブランドSENSETIERが、マレーシア市場にて正式にローンチしました。SENSETIERは、100%天然精油を使用した香りのライフスタイルブランドです。</p><p>今回のマレーシアローンチは、HALNIPがムスリム市場への本格展開を始める記念すべき第一歩となります。製品はすべてハラール認証に配慮した処方で開発されており、マレーシア・クアラルンプールを中心に展開を開始します。</p><p>オンラインショップ（sensetier.com）では現在、DAWNとBREEZEの2製品をお取り扱い中です。ぜひご覧ください。</p>',
-      bodyEn: '<p>Our flagship brand SENSETIER has officially launched in Malaysia. SENSETIER is a lifestyle brand using 100% natural essential oils.</p><p>This Malaysian launch marks our first major step into the Muslim market. All products are developed with Halal-conscious formulations, and we are beginning our expansion centered in Kuala Lumpur.</p><p>DAWN and BREEZE are currently available on our online shop at sensetier.com. We hope you will take a look.</p>',
-      published: true
-    },
-    {
-      id: 'seed_002',
-      tag: 'JOURNAL',
-      date: '2025-04-15',
-      title: 'ムスリム市場インサイト：東南アジア消費者に響くものとは',
-      titleEn: 'Muslim market insight: What resonates with Southeast Asian consumers',
-      thumbnail: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=900&q=80',
-      excerpt: 'マレーシア・インドネシアでのフィールドリサーチから見えてきた知見を共有します。',
-      excerptEn: 'We share our findings from field research across Malaysia and Indonesia.',
-      body: '<p>マレーシア・インドネシアでのフィールドリサーチから、東南アジアのムスリム消費者が大切にしている価値観や購買行動に関するインサイトをご紹介します。</p><h2>「品質×ストーリー」への共感</h2><p>現地のコンシューマーインタビューを通じて最も強く感じたのは、製品の品質だけでなく、その背景にあるストーリーへの関心の高さです。特に日本のクラフツマンシップへの信頼感は非常に高く、「日本製」というだけで大きなブランド価値を持ちます。</p><h2>ハラール対応への期待</h2><p>ムスリム消費者にとって、ハラール対応は最低限の要件です。しかし同時に、「ハラールであること」だけでは差別化にはなりません。ハラールを前提としたうえで、いかに高品質で感性に訴える体験を届けるかが鍵となります。</p>',
-      bodyEn: '<p>From field research in Malaysia and Indonesia, we share insights about the values and purchasing behaviors of Southeast Asian Muslim consumers.</p><h2>Resonance with "Quality × Story"</h2><p>Through consumer interviews on site, we found strong interest not just in product quality but in the story behind each product. Trust in Japanese craftsmanship is particularly high — the "Made in Japan" label carries significant brand value.</p><h2>Expectations for Halal Compliance</h2><p>For Muslim consumers, Halal compliance is a baseline requirement. But being Halal alone is not a differentiator. The key is delivering high-quality, emotionally resonant experiences on top of Halal certification.</p>',
-      published: true
-    },
-    {
       id: 'seed_003',
       tag: 'RELEASE',
       date: '2026-01-05',
