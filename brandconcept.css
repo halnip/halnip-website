@@ -480,6 +480,89 @@
   pointer-events: none;
 }
 
+/* ==============================================
+   OUR SOLUTION
+   ============================================== */
+.bc-solution {
+  background: var(--bc-off-white);
+  padding: var(--section-pad) 0;
+}
+.bc-solution__inner {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+.bc-solution__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--bc-border);
+  margin-bottom: 3rem;
+}
+.bc-solution__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--bc-primary);
+  margin-top: 2.5rem;
+}
+.bc-solution__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.bc-solution__item {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.bc-solution__img {
+  aspect-ratio: 3 / 4;
+  background: var(--bc-earth);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bc-solution__img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.bc-solution__img-placeholder {
+  font-family: var(--font-hero);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba(62,35,26,0.3);
+  text-transform: uppercase;
+}
+.bc-solution__type {
+  font-family: var(--font-hero);
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  color: var(--bc-accent);
+}
+.bc-solution__name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  color: var(--bc-primary);
+  line-height: 1.45;
+}
+.bc-solution__desc {
+  font-family: var(--font-sans);
+  font-size: clamp(0.82rem, 1.1vw, 0.88rem);
+  font-weight: 300;
+  line-height: 1.95;
+  color: rgba(62,35,26,0.68);
+}
+
+/* ==============================================
+   PRODUCE (Magic of Natural Scent)
+   ============================================== */
 .bc-produce__inner {
   max-width: var(--container-max);
   margin: 0 auto;
