@@ -507,6 +507,7 @@
   line-height: 1.6;
   color: var(--bc-primary);
   margin-top: 2.5rem;
+  margin-bottom: 3rem;
 }
 .bc-solution__grid {
   display: grid;
