@@ -178,7 +178,7 @@
 
   // Language toggle
   (function() {
-    let currentLang = 'ja';
+    let currentLang = localStorage.getItem('lang') || 'ja';
     const toggleBtn = document.getElementById('langToggle');
     function applyLang(lang) {
       document.querySelectorAll('[data-' + lang + ']').forEach(el => {
@@ -190,8 +190,10 @@
     }
     toggleBtn.addEventListener('click', () => {
       currentLang = currentLang === 'ja' ? 'en' : 'ja';
+      localStorage.setItem('lang', currentLang);
       applyLang(currentLang);
     });
+    applyLang(currentLang);
   })();
 
   // Scroll reveal

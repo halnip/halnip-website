@@ -246,7 +246,7 @@
 
   <script>
   (function() {
-    let currentLang = 'ja';
+    let currentLang = localStorage.getItem('lang') || 'ja';
     const toggleBtn = document.getElementById('langToggle');
 
     function applyLang(lang) {
@@ -259,8 +259,10 @@
 
     toggleBtn.addEventListener('click', () => {
       currentLang = currentLang === 'ja' ? 'en' : 'ja';
+      localStorage.setItem('lang', currentLang);
       applyLang(currentLang);
     });
+    applyLang(currentLang);
 
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
