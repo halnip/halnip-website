@@ -53,7 +53,7 @@
 /* ─── SECTION MARKERS ────────────────────────── */
 .bc-section-num {
   font-family: var(--font-hero);
-  font-size: 0.65rem;
+  font-size: 0.82rem;
   font-weight: 200;
   letter-spacing: 0.22em;
   color: var(--bc-accent);
@@ -62,7 +62,7 @@
 
 .bc-section-label {
   font-family: var(--font-display);
-  font-size: clamp(0.72rem, 1vw, 0.85rem);
+  font-size: clamp(0.88rem, 1.2vw, 1.05rem);
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--bc-accent);
