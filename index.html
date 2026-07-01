@@ -684,10 +684,11 @@
       if (document.fullscreenElement) {
         btnFs.textContent = '✕';
         btnFs.setAttribute('aria-label', '全画面終了');
+        if (pdfData) setTimeout(function() { renderPage(currentPage); }, 150);
       } else {
         btnFs.textContent = '⛶';
         btnFs.setAttribute('aria-label', '全画面表示');
-        if (pdfDoc) renderPage(currentPage);
+        if (pdfData) setTimeout(function() { renderPage(currentPage); }, 150);
       }
     });
   })();
