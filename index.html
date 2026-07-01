@@ -10,6 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600&family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/pdfjs-dist@3.11.174/legacy/build/pdf.min.js"></script>
+  <script>if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc='https://unpkg.com/pdfjs-dist@3.11.174/legacy/build/pdf.worker.min.js';}</script>
 </head>
 <body>
 
@@ -125,19 +127,16 @@
       <h2 class="consulting__title" data-en="Management Consulting" data-ja="経営コンサルティング">
         経営コンサルティング
       </h2>
-      <div class="consulting__viewer">
-        <div class="consulting__viewer-wrap">
-          <iframe
-            id="pdfFrame"
-            class="consulting__viewer-frame"
-            src="202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=FitH"
-            title="HALNIP会社紹介資料"
-          ></iframe>
+      <div class="consulting__viewer" id="pdfViewerWrap">
+        <div class="consulting__viewer-canvas-wrap" id="pdfCanvasWrap">
+          <canvas id="pdfCanvas"></canvas>
+          <div class="consulting__viewer-loading" id="pdfLoading">読み込み中...</div>
         </div>
         <div class="consulting__viewer-controls">
-          <button class="consulting__viewer-btn" id="pdfPrev" aria-label="前のページ">&#8249;</button>
-          <span class="consulting__viewer-pageinfo" id="pdfPageInfo">1 / 14</span>
-          <button class="consulting__viewer-btn" id="pdfNext" aria-label="次のページ">&#8250;</button>
+          <button class="consulting__viewer-btn" id="pdfPrev" aria-label="前のページ" disabled>&#8249;</button>
+          <span class="consulting__viewer-pageinfo" id="pdfPageInfo">— / —</span>
+          <button class="consulting__viewer-btn" id="pdfNext" aria-label="次のページ" disabled>&#8250;</button>
+          <button class="consulting__viewer-btn consulting__viewer-btn--fs" id="pdfFullscreen" aria-label="全画面表示">&#x26F6;</button>
         </div>
         <p class="consulting__pdf-link">
           <a href="202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf" target="_blank" rel="noopener" data-en="Open Document →" data-ja="会社紹介資料を開く →">会社紹介資料を開く →</a>
@@ -588,30 +587,105 @@
   })();
 
   // =============================================
-  // PDF PAGE NAVIGATION — CONSULTING SECTION
+  // PDF VIEWER — CONSULTING SECTION
   // =============================================
   (function() {
-    const PDF_BASE = '202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf';
-    const TOTAL_PAGES = 14;
-    const frame    = document.getElementById('pdfFrame');
-    const pageInfo = document.getElementById('pdfPageInfo');
-    const btnPrev  = document.getElementById('pdfPrev');
-    const btnNext  = document.getElementById('pdfNext');
-    if (!frame) return;
+    if (typeof pdfjsLib === 'undefined') return;
 
-    let current = 1;
+    const PDF_URL  = '202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf';
+    const CMAP_URL = 'https://unpkg.com/pdfjs-dist@3.11.174/cmaps/';
+    const FONT_URL = 'https://unpkg.com/pdfjs-dist@3.11.174/standard_fonts/';
 
-    function goTo(n) {
-      current = Math.max(1, Math.min(TOTAL_PAGES, n));
-      frame.src = PDF_BASE + '#page=' + current + '&toolbar=0&navpanes=0&scrollbar=0&view=FitH';
-      pageInfo.textContent = current + ' / ' + TOTAL_PAGES;
-      btnPrev.disabled = current <= 1;
-      btnNext.disabled = current >= TOTAL_PAGES;
+    const canvas    = document.getElementById('pdfCanvas');
+    const loading   = document.getElementById('pdfLoading');
+    const pageInfo  = document.getElementById('pdfPageInfo');
+    const btnPrev   = document.getElementById('pdfPrev');
+    const btnNext   = document.getElementById('pdfNext');
+    const btnFs     = document.getElementById('pdfFullscreen');
+    const viewerWrap = document.getElementById('pdfViewerWrap');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const TOTAL = 14;
+    let pdfData = null, currentPage = 1;
+
+    function renderPage(num) {
+      loading.style.display = 'flex';
+      btnPrev.disabled = true;
+      btnNext.disabled = true;
+
+      // Destroy previous document to reset the stuck worker
+      pdfjsLib.getDocument({
+        data: pdfData.slice(0),
+        cMapUrl: CMAP_URL,
+        cMapPacked: true,
+        standardFontDataUrl: FONT_URL
+      }).promise.then(function(pdf) {
+        return pdf.getPage(num).then(function(page) {
+          var wrap = document.getElementById('pdfCanvasWrap');
+          var scale = (wrap.clientWidth || 800) / page.getViewport({ scale: 1 }).width;
+          var vp = page.getViewport({ scale: scale });
+          canvas.width  = vp.width;
+          canvas.height = vp.height;
+          canvas.style.width  = '100%';
+          canvas.style.height = 'auto';
+
+          var settled = false;
+          function finish() {
+            if (settled) return;
+            settled = true;
+            loading.style.display = 'none';
+            pageInfo.textContent = num + ' / ' + TOTAL;
+            btnPrev.disabled = num <= 1;
+            btnNext.disabled = num >= TOTAL;
+          }
+
+          page.render({ canvasContext: ctx, viewport: vp }).promise.then(finish).catch(finish);
+          setTimeout(finish, 2000);
+        });
+      }).catch(function(e) {
+        loading.textContent = '読み込みエラー';
+        console.error('PDF error:', e);
+      });
     }
 
-    btnPrev.addEventListener('click', function() { goTo(current - 1); });
-    btnNext.addEventListener('click', function() { goTo(current + 1); });
-    goTo(1);
+    // Initial load — fetch PDF once, keep as Uint8Array
+    fetch(PDF_URL)
+      .then(function(r) { return r.arrayBuffer(); })
+      .then(function(buf) {
+        pdfData = new Uint8Array(buf);
+        renderPage(currentPage);
+      })
+      .catch(function(e) {
+        loading.textContent = '資料を読み込めませんでした';
+        console.error('PDF load error:', e);
+      });
+
+    btnPrev.addEventListener('click', function() {
+      if (currentPage > 1) { currentPage--; renderPage(currentPage); }
+    });
+    btnNext.addEventListener('click', function() {
+      if (currentPage < TOTAL) { currentPage++; renderPage(currentPage); }
+    });
+
+    // Full screen
+    btnFs.addEventListener('click', function() {
+      if (!document.fullscreenElement) {
+        viewerWrap.requestFullscreen().catch(function() {});
+      } else {
+        document.exitFullscreen();
+      }
+    });
+    document.addEventListener('fullscreenchange', function() {
+      if (document.fullscreenElement) {
+        btnFs.textContent = '✕';
+        btnFs.setAttribute('aria-label', '全画面終了');
+      } else {
+        btnFs.textContent = '⛶';
+        btnFs.setAttribute('aria-label', '全画面表示');
+        if (pdfDoc) renderPage(currentPage);
+      }
+    });
   })();
   </script>
 </body>
