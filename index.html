@@ -125,16 +125,24 @@
       <h2 class="consulting__title" data-en="Management Consulting" data-ja="経営コンサルティング">
         経営コンサルティング
       </h2>
-      <div class="consulting__pdf-wrap">
-        <iframe
-          src="202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf"
-          class="consulting__pdf"
-          title="HALNIP会社紹介資料"
-        ></iframe>
+      <div class="consulting__viewer">
+        <div class="consulting__viewer-wrap">
+          <iframe
+            id="pdfFrame"
+            class="consulting__viewer-frame"
+            src="202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0&view=FitH"
+            title="HALNIP会社紹介資料"
+          ></iframe>
+        </div>
+        <div class="consulting__viewer-controls">
+          <button class="consulting__viewer-btn" id="pdfPrev" aria-label="前のページ">&#8249;</button>
+          <span class="consulting__viewer-pageinfo" id="pdfPageInfo">1 / 14</span>
+          <button class="consulting__viewer-btn" id="pdfNext" aria-label="次のページ">&#8250;</button>
+        </div>
+        <p class="consulting__pdf-link">
+          <a href="202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf" target="_blank" rel="noopener" data-en="Open Document →" data-ja="会社紹介資料を開く →">会社紹介資料を開く →</a>
+        </p>
       </div>
-      <p class="consulting__pdf-link">
-        <a href="202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf" target="_blank" rel="noopener" data-en="Open Document →" data-ja="会社紹介資料を開く →">会社紹介資料を開く →</a>
-      </p>
     </div>
   </section>
 
@@ -577,6 +585,33 @@
       script.src = GAS_URL + '?' + new URLSearchParams({ ...fields, callback: cbName, _t: Date.now() });
       document.head.appendChild(script);
     });
+  })();
+
+  // =============================================
+  // PDF PAGE NAVIGATION — CONSULTING SECTION
+  // =============================================
+  (function() {
+    const PDF_BASE = '202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf';
+    const TOTAL_PAGES = 14;
+    const frame    = document.getElementById('pdfFrame');
+    const pageInfo = document.getElementById('pdfPageInfo');
+    const btnPrev  = document.getElementById('pdfPrev');
+    const btnNext  = document.getElementById('pdfNext');
+    if (!frame) return;
+
+    let current = 1;
+
+    function goTo(n) {
+      current = Math.max(1, Math.min(TOTAL_PAGES, n));
+      frame.src = PDF_BASE + '#page=' + current + '&toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+      pageInfo.textContent = current + ' / ' + TOTAL_PAGES;
+      btnPrev.disabled = current <= 1;
+      btnNext.disabled = current >= TOTAL_PAGES;
+    }
+
+    btnPrev.addEventListener('click', function() { goTo(current - 1); });
+    btnNext.addEventListener('click', function() { goTo(current + 1); });
+    goTo(1);
   })();
   </script>
 </body>
