@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>経営コンサルティング | HALNIP株式会社</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;600&family=Shippori+Mincho:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── LP Reset & Base ─────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--color-white); color: var(--color-text); font-family: var(--font-sans); }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .lp-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 60px);
+    }
+
+    .lp-label {
+      font-family: var(--font-hero);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      color: var(--color-accent);
+      text-transform: uppercase;
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    .lp-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 60px);
+      height: 64px;
+      background: rgba(26, 62, 42, 0.92);
+      backdrop-filter: blur(12px);
+    }
+    .lp-nav__logo img { height: 28px; width: auto; filter: brightness(0) invert(1); }
+    .lp-nav__logo-text { font-family: var(--font-hero); font-size: 1.1rem; font-weight: 300; letter-spacing: 0.2em; color: #fff; }
+    .lp-nav__cta {
+      font-family: var(--font-hero);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: var(--color-primary);
+      background: var(--color-accent);
+      border: none;
+      padding: 0.6em 1.6em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lp-nav__cta:hover { background: var(--color-accent-light); }
+
+    /* ── HERO ────────────────────────────────── */
+    .lp-hero {
+      min-height: 100svh;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px clamp(20px, 5vw, 60px) 80px;
+    }
+    .lp-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('images/Bizcon_02.jpg') center/cover no-repeat;
+      opacity: 0.18;
+    }
+    .lp-hero__inner {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .lp-hero__tag {
+      font-family: var(--font-hero);
+      font-size: 0.7rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      color: var(--color-accent);
+      margin-bottom: 2rem;
+    }
+    .lp-hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4.5vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.5;
+      color: #fff;
+      max-width: 18em;
+      margin-bottom: 1.8rem;
+    }
+    .lp-hero__en {
+      font-family: var(--font-hero);
+      font-size: clamp(0.8rem, 1.4vw, 1rem);
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 3rem;
+    }
+    .lp-hero__cta {
+      display: inline-block;
+      font-family: var(--font-hero);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--color-primary);
+      background: var(--color-accent);
+      padding: 1em 2.8em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lp-hero__cta:hover { background: var(--color-accent-light); transform: translateY(-2px); }
+    .lp-hero__scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: var(--font-hero);
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.35);
+    }
+    .lp-hero__scroll::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* ── MISSION ─────────────────────────────── */
+    .lp-mission {
+      padding: clamp(80px, 10vw, 130px) 0;
+      background: #fff;
+    }
+    .lp-mission__inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(40px, 6vw, 100px);
+      align-items: start;
+    }
+    .lp-mission__left { padding-top: 0.4rem; }
+    .lp-mission__heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--color-primary);
+      margin-top: 1rem;
+    }
+    .lp-mission__text {
+      font-size: clamp(0.9rem, 1.4vw, 1rem);
+      line-height: 2.1;
+      color: var(--color-text-muted);
+      margin-bottom: 1.4rem;
+    }
+    .lp-mission__text + .lp-mission__text { margin-top: 0; }
+
+    /* ── CEO ─────────────────────────────────── */
+    .lp-ceo {
+      padding: clamp(80px, 10vw, 130px) 0;
+      background: var(--color-bg-section);
+    }
+    .lp-ceo__inner { display: grid; grid-template-columns: 260px 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+    .lp-ceo__photo {
+      aspect-ratio: 3/4;
+      background: var(--color-border);
+      overflow: hidden;
+    }
+    .lp-ceo__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+    .lp-ceo__header { margin-bottom: 1.6rem; }
+    .lp-ceo__name-ja {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-weight: 500;
+      color: var(--color-text);
+      margin: 0.8rem 0 0.3rem;
+    }
+    .lp-ceo__name-en {
+      font-family: var(--font-hero);
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--color-text-muted);
+    }
+    .lp-ceo__title-bar {
+      display: inline-block;
+      font-family: var(--font-hero);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: #fff;
+      background: var(--color-primary);
+      padding: 0.35em 1em;
+      margin-top: 0.6rem;
+    }
+    .lp-ceo__bio {
+      font-size: 0.93rem;
+      line-height: 2;
+      color: var(--color-text-muted);
+      margin-bottom: 1.4rem;
+    }
+    .lp-ceo__tags {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+      margin-top: 1.8rem;
+    }
+    .lp-ceo__tag-group { display: flex; gap: 1rem; align-items: flex-start; }
+    .lp-ceo__tag-label {
+      flex: 0 0 auto;
+      font-family: var(--font-hero);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: #fff;
+      background: var(--color-primary);
+      padding: 0.5em 0.7em;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+    .lp-ceo__tag-items {
+      list-style: none;
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: var(--color-text-muted);
+    }
+    .lp-ceo__tag-items li::before { content: '・'; }
+    .lp-ceo__quals {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .lp-ceo__qual {
+      font-size: 0.78rem;
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+      padding: 0.3em 0.9em;
+      line-height: 1.5;
+    }
+
+    /* ── SERVICES ────────────────────────────── */
+    .lp-services {
+      padding: clamp(80px, 10vw, 130px) 0;
+      background: #fff;
+    }
+    .lp-services__header { text-align: center; margin-bottom: clamp(40px, 6vw, 70px); }
+    .lp-services__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-top: 0.8rem;
+    }
+    .lp-services__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      background: var(--color-border);
+    }
+    .lp-service-card {
+      background: #fff;
+      padding: clamp(28px, 4vw, 50px);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .lp-service-card:hover { background: var(--color-bg-section); }
+    .lp-service-card__num {
+      font-family: var(--font-hero);
+      font-size: 3.5rem;
+      font-weight: 100;
+      color: rgba(26,62,42,0.07);
+      line-height: 1;
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+    }
+    .lp-service-card__en {
+      font-family: var(--font-hero);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--color-accent);
+      margin-bottom: 0.6rem;
+    }
+    .lp-service-card__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      font-weight: 500;
+      color: var(--color-primary);
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+    .lp-service-card__divider {
+      width: 28px;
+      height: 1px;
+      background: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+    .lp-service-card__text {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: var(--color-text-muted);
+    }
+    .lp-service-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.2rem;
+    }
+    .lp-service-card__tag {
+      font-family: var(--font-hero);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: var(--color-primary);
+      border: 1px solid rgba(26,62,42,0.25);
+      padding: 0.25em 0.7em;
+    }
+
+    /* ── PLAN ────────────────────────────────── */
+    .lp-plan {
+      padding: clamp(80px, 10vw, 130px) 0;
+      background: var(--color-primary);
+    }
+    .lp-plan__header { text-align: center; margin-bottom: clamp(40px, 6vw, 70px); }
+    .lp-plan__label { color: var(--color-accent); }
+    .lp-plan__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 500;
+      color: #fff;
+      margin-top: 0.8rem;
+    }
+    .lp-plan__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+    .lp-plan-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: clamp(28px, 4vw, 50px);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .lp-plan-card:hover { background: rgba(255,255,255,0.09); border-color: rgba(181,150,90,0.5); }
+    .lp-plan-card--featured { border-color: rgba(181,150,90,0.6); background: rgba(181,150,90,0.07); }
+    .lp-plan-card__badge {
+      display: inline-block;
+      font-family: var(--font-hero);
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--color-primary);
+      background: var(--color-accent);
+      padding: 0.25em 0.9em;
+      margin-bottom: 1.2rem;
+    }
+    .lp-plan-card__name {
+      font-family: var(--font-hero);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.5rem;
+    }
+    .lp-plan-card__price {
+      font-family: var(--font-hero);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 200;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .lp-plan-card__price span {
+      font-size: 0.9rem;
+      font-weight: 300;
+      opacity: 0.6;
+      margin-left: 0.3em;
+    }
+    .lp-plan-card__note {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 1.8rem;
+    }
+    .lp-plan-card__divider { width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 1.8rem; }
+    .lp-plan-card__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .lp-plan-card__list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+    .lp-plan-card__list li::before {
+      content: '—';
+      color: var(--color-accent);
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      margin-top: 0.15em;
+    }
+    .lp-plan__note {
+      text-align: center;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2rem;
+    }
+
+    /* ── FLOW ────────────────────────────────── */
+    .lp-flow {
+      padding: clamp(80px, 10vw, 130px) 0;
+      background: var(--color-bg-section);
+    }
+    .lp-flow__header { text-align: center; margin-bottom: clamp(40px, 6vw, 70px); }
+    .lp-flow__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-top: 0.8rem;
+    }
+    .lp-flow__steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .lp-flow__steps::before {
+      content: '';
+      position: absolute;
+      top: 1.5rem;
+      left: calc(12.5%);
+      right: calc(12.5%);
+      height: 1px;
+      background: var(--color-border);
+      z-index: 0;
+    }
+    .lp-flow__step {
+      text-align: center;
+      padding: 0 1rem;
+      position: relative;
+    }
+    .lp-flow__step-num {
+      font-family: var(--font-hero);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: #fff;
+      background: var(--color-primary);
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .lp-flow__step-title {
+      font-family: var(--font-serif);
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+    .lp-flow__step-text {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--color-text-muted);
+    }
+
+    /* ── CONTACT ─────────────────────────────── */
+    .lp-contact {
+      padding: clamp(80px, 10vw, 130px) 0;
+      background: #fff;
+    }
+    .lp-contact__inner { text-align: center; max-width: 600px; margin: 0 auto; }
+    .lp-contact__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 500;
+      color: var(--color-text);
+      margin: 0.8rem 0 1.2rem;
+    }
+    .lp-contact__text {
+      font-size: 0.92rem;
+      line-height: 2;
+      color: var(--color-text-muted);
+      margin-bottom: 2.4rem;
+    }
+    .lp-contact__email {
+      font-family: var(--font-hero);
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--color-primary);
+      border-bottom: 1px solid var(--color-accent);
+      padding-bottom: 0.15em;
+      transition: color 0.2s;
+    }
+    .lp-contact__email:hover { color: var(--color-accent); }
+    .lp-contact__cta {
+      display: inline-block;
+      font-family: var(--font-hero);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: #fff;
+      background: var(--color-primary);
+      padding: 1.1em 3em;
+      margin-top: 2rem;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .lp-contact__cta:hover { background: var(--color-primary-light); transform: translateY(-2px); }
+    .lp-contact__info {
+      margin-top: 2.4rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      line-height: 1.9;
+    }
+
+    /* ── FOOTER ──────────────────────────────── */
+    .lp-footer {
+      padding: 2rem clamp(20px, 5vw, 60px);
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .lp-footer__copy {
+      font-family: var(--font-hero);
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.35);
+    }
+    .lp-footer__back {
+      font-family: var(--font-hero);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.35);
+      transition: color 0.2s;
+    }
+    .lp-footer__back:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 768px) {
+      .lp-mission__inner { grid-template-columns: 1fr; gap: 2rem; }
+      .lp-ceo__inner { grid-template-columns: 1fr; }
+      .lp-ceo__photo { max-width: 200px; aspect-ratio: 1/1; }
+      .lp-services__grid { grid-template-columns: 1fr; }
+      .lp-plan__grid { grid-template-columns: 1fr; }
+      .lp-flow__steps { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .lp-flow__steps::before { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .lp-flow__steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ────────────────────────────────── -->
+  <nav class="lp-nav">
+    <a href="index.html" class="lp-nav__logo">
+      <img src="images/logo_green.svg" alt="HALNIP"
+        onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+      <span class="lp-nav__logo-text" style="display:none;">HALNIP</span>
+    </a>
+    <a href="#contact" class="lp-nav__cta">お問い合わせ</a>
+  </nav>
+
+  <!-- ── HERO ───────────────────────────────── -->
+  <section class="lp-hero">
+    <div class="lp-hero__inner">
+      <p class="lp-hero__tag">HALNIP Inc. — Consulting Service</p>
+      <h1 class="lp-hero__title">
+        社会・産業イノベーションを実装し、<br>豊かな未来づくりに貢献する。
+      </h1>
+      <p class="lp-hero__en">Smart City &amp; Innovation Consulting</p>
+      <a href="#contact" class="lp-hero__cta">無料相談を申し込む</a>
+    </div>
+    <p class="lp-hero__scroll">SCROLL</p>
+  </section>
+
+  <!-- ── MISSION ─────────────────────────────── -->
+  <section class="lp-mission" id="mission">
+    <div class="lp-container">
+      <div class="lp-mission__inner">
+        <div class="lp-mission__left">
+          <p class="lp-label">MISSION</p>
+          <h2 class="lp-mission__heading">Weaving<br>Cultures,<br>Shaping<br>the Future</h2>
+        </div>
+        <div class="lp-mission__right">
+          <p class="lp-mission__text">
+            ハルニップ株式会社は、クライアントの新産業・新事業創出を支援することで、社会に対して高い経済・社会的効果をもたらすイノベーション・コンサルティングサービスを提供しています。
+          </p>
+          <p class="lp-mission__text">
+            複雑化する社会課題に対しコミットすることで、次世代に向けた企業の成長を促し、かつ優れた人材の育成・輩出を支援します。
+          </p>
+          <p class="lp-mission__text">
+            日本の都市・社会インフラ領域での豊富な実績と、ASEANを中心とするクロスボーダーネットワークを活かし、企業の成長戦略から実行フェーズまでを一気通貫で支援します。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CEO ────────────────────────────────── -->
+  <section class="lp-ceo" id="ceo">
+    <div class="lp-container">
+      <p class="lp-label" style="margin-bottom:2.5rem;">CEO PROFILE</p>
+      <div class="lp-ceo__inner">
+        <div class="lp-ceo__photo">
+          <img src="images/IMG_7095_b.jpg" alt="今野 広樹"
+            onerror="this.style.background='#d8d0c4';" />
+        </div>
+        <div class="lp-ceo__content">
+          <div class="lp-ceo__header">
+            <p class="lp-ceo__name-ja">今野　広樹</p>
+            <p class="lp-ceo__name-en">HIROKI IMANO</p>
+            <span class="lp-ceo__title-bar">代表取締役 / CEO</span>
+          </div>
+          <p class="lp-ceo__bio">
+            ㈱日建設計 都市部門、EYストラテジー・アンド・コンサルティング㈱ 公共・社会インフラユニット マネージャーを経て、ハルニップ㈱を創業。
+          </p>
+          <p class="lp-ceo__bio">
+            10年以上にわたり社会インフラ業界に携わり、経営戦略から全国各地の都市・地域開発、オープンイノベーション・新規事業の領域選定〜戦略策定〜事業化までの支援実績が豊富。不動産・鉄道・電力・ガス・金融・食品・エンタメ・ライフサイエンスなど多様な業界プレイヤーとの共同実績があり、Go-To Market戦略を含むビジネスデザインを得意とする。
+          </p>
+          <div class="lp-ceo__tags">
+            <div class="lp-ceo__tag-group">
+              <span class="lp-ceo__tag-label">講演等</span>
+              <ul class="lp-ceo__tag-items">
+                <li>新規事業スクール講師 ー自社リソースの分解整理ー</li>
+                <li>企業セミナー講演 ー大企業のイノベーション戦略ー</li>
+                <li>社内起業制度審査員</li>
+              </ul>
+            </div>
+            <div class="lp-ceo__tag-group">
+              <span class="lp-ceo__tag-label">資格</span>
+              <ul class="lp-ceo__tag-items">
+                <li>工学修士（建築・都市科学）</li>
+                <li>PMP（Project Management Professional）</li>
+                <li>再開発プランナー</li>
+                <li>日本ソムリエ協会認定ワインエキスパート｜WSET LEVEL 3</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ───────────────────────────── -->
+  <section class="lp-services" id="services">
+    <div class="lp-container">
+      <div class="lp-services__header">
+        <p class="lp-label">SERVICES</p>
+        <h2 class="lp-services__title">4つのコンサルティング領域</h2>
+      </div>
+      <div class="lp-services__grid">
+
+        <div class="lp-service-card">
+          <span class="lp-service-card__num">01</span>
+          <p class="lp-service-card__en">GRAND DESIGN &amp; STRATEGY</p>
+          <h3 class="lp-service-card__title">グランドデザイン&amp;<br>経営戦略</h3>
+          <div class="lp-service-card__divider"></div>
+          <p class="lp-service-card__text">
+            企業・事業の根幹となる中長期グランドデザインを策定。経営ビジョンの具体化から事業ポートフォリオの再設計、toB・toC双方の市場参入戦略まで、経営層と並走して実行可能な戦略を構築します。
+          </p>
+          <div class="lp-service-card__tags">
+            <span class="lp-service-card__tag">経営戦略策定</span>
+            <span class="lp-service-card__tag">事業ポートフォリオ</span>
+            <span class="lp-service-card__tag">市場参入戦略</span>
+          </div>
+        </div>
+
+        <div class="lp-service-card">
+          <span class="lp-service-card__num">02</span>
+          <p class="lp-service-card__en">OPEN INNOVATION &amp; NEW BIZ-DEV</p>
+          <h3 class="lp-service-card__title">オープンイノベーション&amp;<br>新事業開発</h3>
+          <div class="lp-service-card__divider"></div>
+          <p class="lp-service-card__text">
+            社内外のリソースを組み合わせたエコシステム構築を支援。スタートアップ・大企業・研究機関との連携設計から、新事業の領域選定・戦略策定・事業化フェーズまで一貫してサポートします。
+          </p>
+          <div class="lp-service-card__tags">
+            <span class="lp-service-card__tag">エコシステム構築</span>
+            <span class="lp-service-card__tag">新規事業開発</span>
+            <span class="lp-service-card__tag">事業化支援</span>
+          </div>
+        </div>
+
+        <div class="lp-service-card">
+          <span class="lp-service-card__num">03</span>
+          <p class="lp-service-card__en">URBAN / REGIONAL TRANSFORMATION</p>
+          <h3 class="lp-service-card__title">都市・地域<br>トランスフォーメーション</h3>
+          <div class="lp-service-card__divider"></div>
+          <p class="lp-service-card__text">
+            Smart City推進・エリアマネジメント・地域活性化など、都市・地域の変革アジェンダに対して戦略から実装まで支援。Mobility / Environment / Healthcare / Finance など複合領域に対応します。
+          </p>
+          <div class="lp-service-card__tags">
+            <span class="lp-service-card__tag">スマートシティ</span>
+            <span class="lp-service-card__tag">エリアマネジメント</span>
+            <span class="lp-service-card__tag">地域活性化</span>
+          </div>
+        </div>
+
+        <div class="lp-service-card">
+          <span class="lp-service-card__num">04</span>
+          <p class="lp-service-card__en">CROSS-BORDER BUSINESS DEPLOYMENT</p>
+          <h3 class="lp-service-card__title">クロスボーダー<br>事業展開</h3>
+          <div class="lp-service-card__divider"></div>
+          <p class="lp-service-card__text">
+            ASEAN（バンコク・ホーチミン・クアラルンプール・シンガポール・ジャカルタ）を中心とした海外展開を支援。インバウンド・アウトバウンド双方のビジネスデザインと現地ネットワークを活用した事業推進をサポートします。
+          </p>
+          <div class="lp-service-card__tags">
+            <span class="lp-service-card__tag">ASEAN展開</span>
+            <span class="lp-service-card__tag">インバウンド</span>
+            <span class="lp-service-card__tag">アウトバウンド</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PLAN ───────────────────────────────── -->
+  <section class="lp-plan" id="plan">
+    <div class="lp-container">
+      <div class="lp-plan__header">
+        <p class="lp-label lp-plan__label">SERVICE PLAN</p>
+        <h2 class="lp-plan__title">サービスプラン</h2>
+      </div>
+      <div class="lp-plan__grid">
+
+        <div class="lp-plan-card">
+          <p class="lp-plan-card__name">LIGHT</p>
+          <p class="lp-plan-card__price">¥100,000<span>/ 月〜（税別）</span></p>
+          <p class="lp-plan-card__note">月1〜2回のミーティング</p>
+          <div class="lp-plan-card__divider"></div>
+          <ul class="lp-plan-card__list">
+            <li>月1〜2回の戦略ミーティング</li>
+            <li>Slackによるチャット相談（Q&amp;A）</li>
+            <li>議事録・アクションプラン提供</li>
+            <li>3ヶ月〜の継続契約</li>
+          </ul>
+        </div>
+
+        <div class="lp-plan-card lp-plan-card--featured">
+          <span class="lp-plan-card__badge">RECOMMENDED</span>
+          <p class="lp-plan-card__name">STANDARD</p>
+          <p class="lp-plan-card__price">¥500,000<span>/ 月〜（税別）</span></p>
+          <p class="lp-plan-card__note">月2〜4回のミーティング</p>
+          <div class="lp-plan-card__divider"></div>
+          <ul class="lp-plan-card__list">
+            <li>月2〜4回の集中ミーティング</li>
+            <li>Slackによるチャット相談（Q&amp;A）</li>
+            <li>戦略資料・提案書の共同作成</li>
+            <li>PoC（実証実験）設計・推進支援</li>
+            <li>外部ネットワークの紹介・連携</li>
+            <li>3ヶ月〜の継続契約</li>
+          </ul>
+        </div>
+
+      </div>
+      <p class="lp-plan__note">※ プロジェクト型（スポット）のご相談も承ります。まずはお気軽にお問い合わせください。</p>
+    </div>
+  </section>
+
+  <!-- ── FLOW ───────────────────────────────── -->
+  <section class="lp-flow" id="flow">
+    <div class="lp-container">
+      <div class="lp-flow__header">
+        <p class="lp-label">FLOW</p>
+        <h2 class="lp-flow__title">ご支援の流れ</h2>
+      </div>
+      <div class="lp-flow__steps">
+        <div class="lp-flow__step">
+          <div class="lp-flow__step-num">01</div>
+          <p class="lp-flow__step-title">お問い合わせ</p>
+          <p class="lp-flow__step-text">メールまたはフォームよりご連絡ください。通常2営業日以内にご返信します。</p>
+        </div>
+        <div class="lp-flow__step">
+          <div class="lp-flow__step-num">02</div>
+          <p class="lp-flow__step-title">無料ヒアリング</p>
+          <p class="lp-flow__step-text">オンラインにて約60分、現状の課題・目標・背景をヒアリングします。</p>
+        </div>
+        <div class="lp-flow__step">
+          <div class="lp-flow__step-num">03</div>
+          <p class="lp-flow__step-title">提案・契約</p>
+          <p class="lp-flow__step-text">ヒアリング内容をもとに最適なプランをご提案。合意後、契約を締結します。</p>
+        </div>
+        <div class="lp-flow__step">
+          <div class="lp-flow__step-num">04</div>
+          <p class="lp-flow__step-title">支援開始</p>
+          <p class="lp-flow__step-text">キックオフミーティングを経て、伴走型のコンサルティング支援をスタートします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ────────────────────────────── -->
+  <section class="lp-contact" id="contact">
+    <div class="lp-container">
+      <div class="lp-contact__inner">
+        <p class="lp-label">CONTACT</p>
+        <h2 class="lp-contact__title">まずはご相談ください</h2>
+        <p class="lp-contact__text">
+          新規事業・経営戦略・都市開発・ASEAN展開など、<br>
+          どのようなご相談でもお気軽にお問い合わせください。<br>
+          初回ヒアリングは無料で承ります。
+        </p>
+        <a href="mailto:info@halnip.com" class="lp-contact__email">info@halnip.com</a>
+        <br>
+        <a href="mailto:info@halnip.com?subject=コンサルティングのご相談" class="lp-contact__cta">
+          無料相談を申し込む
+        </a>
+        <div class="lp-contact__info">
+          <p>ハルニップ株式会社</p>
+          <p>〒271-0092 千葉県松戸市松戸1307-1 松戸ビル13F</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────── -->
+  <footer class="lp-footer">
+    <p class="lp-footer__copy">&copy; 2026 HALNIP Inc. All rights reserved.</p>
+    <a href="index.html" class="lp-footer__back">← トップページへ</a>
+  </footer>
+
+  <script src="cursor.js"></script>
+
+</body>
+</html>
