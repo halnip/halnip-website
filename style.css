@@ -485,6 +485,63 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   pointer-events: none;
 }
 
+/* ─── CONSULTING ─────────────────────────────── */
+.consulting {
+  padding: var(--section-pad) 0;
+  background: var(--color-bg-section);
+}
+
+.consulting__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.consulting__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-text);
+}
+
+.consulting__pdf-wrap {
+  width: 100%;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+}
+
+.consulting__pdf {
+  width: 100%;
+  height: 75vh;
+  min-height: 500px;
+  border: none;
+  display: block;
+}
+
+.consulting__pdf-link {
+  text-align: right;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.consulting__pdf-link a {
+  color: var(--color-accent);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.consulting__pdf-link a:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .consulting__pdf {
+    height: 50vh;
+    min-height: 350px;
+  }
+}
+
 /* ─── OUR BRAND ──────────────────────────────── */
 .brand {
   padding: var(--section-pad) 0;
