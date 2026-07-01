@@ -627,7 +627,8 @@
         return pdf.getPage(num).then(function(page) {
           var wrap = document.getElementById('pdfCanvasWrap');
           var dpr = Math.min(window.devicePixelRatio || 1, 3);
-          var cssScale = (wrap.clientWidth || 800) / page.getViewport({ scale: 1 }).width;
+          var refWidth = document.fullscreenElement ? window.innerWidth : (wrap.clientWidth || 800);
+          var cssScale = refWidth / page.getViewport({ scale: 1 }).width;
           var vp = page.getViewport({ scale: cssScale * dpr });
           canvas.width  = vp.width;
           canvas.height = vp.height;
