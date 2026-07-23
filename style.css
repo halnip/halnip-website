@@ -616,6 +616,65 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: 1.3rem;
 }
 
+/* ── Consulting menu cards ── */
+.consulting__menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--color-border);
+  margin-bottom: 2.5rem;
+}
+.consulting__menu-card {
+  background: var(--color-white);
+  padding: clamp(24px, 3.5vw, 44px);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s;
+}
+.consulting__menu-card:hover { background: var(--color-bg-section); }
+.consulting__menu-num {
+  font-family: var(--font-hero);
+  font-size: 3rem;
+  font-weight: 100;
+  color: rgba(26,62,42,0.06);
+  line-height: 1;
+  position: absolute;
+  top: 1rem;
+  right: 1.2rem;
+  pointer-events: none;
+}
+.consulting__menu-en {
+  font-family: var(--font-hero);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+.consulting__menu-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-weight: 500;
+  color: var(--color-primary);
+  line-height: 1.4;
+  margin-bottom: 0.9rem;
+}
+.consulting__menu-divider {
+  width: 24px;
+  height: 1px;
+  background: var(--color-accent);
+  margin-bottom: 0.9rem;
+}
+.consulting__menu-text {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.85;
+  color: var(--color-text-muted);
+}
+@media (max-width: 680px) {
+  .consulting__menu { grid-template-columns: 1fr; }
+}
+
 .consulting__pdf-link {
   text-align: right;
   font-family: var(--font-sans);
