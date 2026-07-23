@@ -706,6 +706,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: opacity 0.25s;
 }
 .consulting__insight-card:hover { opacity: 0.88; }
+.consulting__insight-link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+}
 .consulting__insight-img {
   height: 190px;
   background-size: cover;

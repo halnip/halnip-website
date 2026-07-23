@@ -4,11 +4,50 @@
 const HALNIP_DB = (function () {
   const KEY           = 'halnip_journal_posts';
   const VERSION_KEY   = 'halnip_journal_seed_version';
-  const SEED_VERSION  = '2026-06-09-07';   // ← SEED更新時にここを書き換える（旧キャッシュを自動上書き）
+  const SEED_VERSION  = '2026-07-23-01';   // ← SEED更新時にここを書き換える（旧キャッシュを自動上書き）
   const SESSION_KEY   = 'halnip_admin_session';
   const ADMIN_PASS    = 'HnImanon21'; // ← 変更可
 
   const SEED = [
+    {
+      id: 'insight_003',
+      tag: 'INSIGHT',
+      date: '2026-07-01',
+      title: '日本×ASEAN 越境ビジネスの最前線',
+      titleEn: 'Japan × ASEAN: Unlocking Cross-Border Business Opportunities',
+      thumbnail: 'https://raw.githubusercontent.com/halnip/halnip-website/main/images/Bizcon_03.jpg',
+      excerpt: '急成長するASEAN市場は、日本企業にとって大きなチャンスを秘めています。越境事業展開で成果を出すための市場参入戦略と現地連携のポイントを紹介します。',
+      excerptEn: 'Southeast Asia\'s rapid growth presents significant opportunities for Japanese companies. We outline strategies for successful market entry and cross-border business deployment.',
+      body: '',
+      bodyEn: '',
+      published: true
+    },
+    {
+      id: 'insight_002',
+      tag: 'INSIGHT',
+      date: '2026-06-15',
+      title: 'イノベーション・エコシステムの設計と構築',
+      titleEn: 'Building Innovation Ecosystems: Beyond Corporate R&D',
+      thumbnail: 'https://raw.githubusercontent.com/halnip/halnip-website/main/images/Bizcon_01.jpg',
+      excerpt: '大企業・スタートアップ・研究機関をつなぐオープンイノベーション。エコシステムの設計から新事業の事業化まで、先進企業の取り組みを分析します。',
+      excerptEn: 'Open innovation and ecosystem building are the new competitive frontiers. We analyze how leading companies are designing partnerships and commercializing new businesses.',
+      body: '',
+      bodyEn: '',
+      published: true
+    },
+    {
+      id: 'insight_001',
+      tag: 'INSIGHT',
+      date: '2026-06-01',
+      title: '都市の未来を変えるスマートシティ戦略',
+      titleEn: 'The Future of Urban Transformation: Smart City Strategy',
+      thumbnail: 'https://raw.githubusercontent.com/halnip/halnip-website/main/images/Bizcon_02.jpg',
+      excerpt: 'データとテクノロジーを活用し、都市・地域の社会課題を解決するスマートシティ構想。成功するためのグランドデザインと実装のポイントを解説します。',
+      excerptEn: 'How can cities leverage data and technology to solve mobility, environment, and healthcare challenges? We explore the key elements of successful smart city initiatives.',
+      body: '',
+      bodyEn: '',
+      published: true
+    },
     {
       id: 'seed_006',
       tag: 'RELEASE',

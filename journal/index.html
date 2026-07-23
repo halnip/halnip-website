@@ -51,6 +51,7 @@
         <button class="filter-btn active" data-filter="all" data-ja="すべて" data-en="ALL">すべて</button>
         <button class="filter-btn" data-filter="RELEASE" data-ja="リリース" data-en="RELEASE">リリース</button>
         <button class="filter-btn" data-filter="JOURNAL" data-ja="ジャーナル" data-en="JOURNAL">ジャーナル</button>
+        <button class="filter-btn" data-filter="INSIGHT" data-ja="インサイト" data-en="INSIGHT">インサイト</button>
       </div>
 
       <!-- Grid (populated by JS) -->
@@ -131,7 +132,9 @@
     function cardHTML(post) {
       const tagLabel = post.tag === 'RELEASE'
         ? (currentLang === 'ja' ? 'リリース' : 'RELEASE')
-        : (currentLang === 'ja' ? 'ジャーナル' : 'JOURNAL');
+        : post.tag === 'INSIGHT'
+          ? (currentLang === 'ja' ? 'インサイト' : 'INSIGHT')
+          : (currentLang === 'ja' ? 'ジャーナル' : 'JOURNAL');
       const title   = currentLang === 'ja' ? post.title   : (post.titleEn   || post.title);
       const excerpt = currentLang === 'ja' ? post.excerpt : (post.excerptEn || post.excerpt);
       return `
