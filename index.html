@@ -355,7 +355,7 @@
     const grid = document.getElementById('topJournalGrid');
     if (!grid || typeof HALNIP_DB === 'undefined') return;
 
-    const posts = HALNIP_DB.getPublishedPosts().slice(0, 3);
+    const posts = HALNIP_DB.getPublishedPosts().filter(p => p.tag !== 'INSIGHT').slice(0, 3);
     if (posts.length === 0) return;
 
     grid.innerHTML = posts.map(post => {
