@@ -404,7 +404,7 @@
         <article class="consulting__insight-card">
           <a href="journal/post.html?id=${post.id}" class="consulting__insight-link">
             <div class="consulting__insight-img" style="background-image:url('${post.thumbnail}')">
-              <span class="consulting__insight-cat">INSIGHT</span>
+              <span class="consulting__insight-cat">${post.category || 'INSIGHT'}</span>
             </div>
             <div class="consulting__insight-body">
               <h4 class="consulting__insight-title" data-ja="${title}" data-en="${titleEn}">${title}</h4>

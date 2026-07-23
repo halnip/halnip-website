@@ -53,6 +53,15 @@
         <button class="filter-btn" data-filter="JOURNAL" data-ja="ジャーナル" data-en="JOURNAL">ジャーナル</button>
         <button class="filter-btn" data-filter="INSIGHT" data-ja="インサイト" data-en="INSIGHT">インサイト</button>
       </div>
+      <!-- INSIGHT sub-filter (visible only when INSIGHT tab is active) -->
+      <div class="insight-subfilter" id="insightSubFilter" style="display:none;">
+        <select class="insight-subfilter-select" id="insightCategory">
+          <option value="" data-ja="すべてのインサイト" data-en="All Insights">すべてのインサイト</option>
+          <option value="SMART CITY">SMART CITY</option>
+          <option value="INNOVATION">INNOVATION</option>
+          <option value="CROSS-BORDER">CROSS-BORDER</option>
+        </select>
+      </div>
 
       <!-- Grid (populated by JS) -->
       <div class="journal-grid" id="journalGrid">
@@ -102,10 +111,11 @@
   <script>
   (function () {
     // ── State ──
-    let currentLang   = 'ja';
-    let currentFilter = 'all';
-    let currentPage   = 1;
-    const PER_PAGE    = 9;
+    let currentLang     = 'ja';
+    let currentFilter   = 'all';
+    let currentCategory = '';
+    let currentPage     = 1;
+    const PER_PAGE      = 9;
 
     // ── Lang ──
     function applyLang(lang) {
@@ -133,7 +143,7 @@
       const tagLabel = post.tag === 'RELEASE'
         ? (currentLang === 'ja' ? 'リリース' : 'RELEASE')
         : post.tag === 'INSIGHT'
-          ? (currentLang === 'ja' ? 'インサイト' : 'INSIGHT')
+          ? (post.category || 'INSIGHT')
           : (currentLang === 'ja' ? 'ジャーナル' : 'JOURNAL');
       const title   = currentLang === 'ja' ? post.title   : (post.titleEn   || post.title);
       const excerpt = currentLang === 'ja' ? post.excerpt : (post.excerptEn || post.excerpt);
@@ -157,7 +167,10 @@
     // ── Render grid ──
     function render() {
       const all   = HALNIP_DB.getPublishedPosts();
-      const filt  = currentFilter === 'all' ? all : all.filter(p => p.tag === currentFilter);
+      let filt    = currentFilter === 'all' ? all : all.filter(p => p.tag === currentFilter);
+      if (currentFilter === 'INSIGHT' && currentCategory) {
+        filt = filt.filter(p => p.category === currentCategory);
+      }
       const total = filt.length;
       const pages = Math.ceil(total / PER_PAGE);
       currentPage = Math.min(currentPage, pages || 1);
@@ -196,9 +209,19 @@
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentFilter = btn.dataset.filter;
+        currentCategory = '';
+        document.getElementById('insightCategory').value = '';
+        document.getElementById('insightSubFilter').style.display = currentFilter === 'INSIGHT' ? '' : 'none';
         currentPage = 1;
         render();
       });
+    });
+
+    // ── INSIGHT sub-filter ──
+    document.getElementById('insightCategory').addEventListener('change', function() {
+      currentCategory = this.value;
+      currentPage = 1;
+      render();
     });
 
     // ── Hamburger ──

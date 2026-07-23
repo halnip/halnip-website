@@ -4,7 +4,7 @@
 const HALNIP_DB = (function () {
   const KEY           = 'halnip_journal_posts';
   const VERSION_KEY   = 'halnip_journal_seed_version';
-  const SEED_VERSION  = '2026-07-23-01';   // ← SEED更新時にここを書き換える（旧キャッシュを自動上書き）
+  const SEED_VERSION  = '2026-07-23-02';   // ← SEED更新時にここを書き換える（旧キャッシュを自動上書き）
   const SESSION_KEY   = 'halnip_admin_session';
   const ADMIN_PASS    = 'HnImanon21'; // ← 変更可
 
@@ -12,6 +12,7 @@ const HALNIP_DB = (function () {
     {
       id: 'insight_003',
       tag: 'INSIGHT',
+      category: 'CROSS-BORDER',
       date: '2026-07-01',
       title: '日本×ASEAN 越境ビジネスの最前線',
       titleEn: 'Japan × ASEAN: Unlocking Cross-Border Business Opportunities',
@@ -25,6 +26,7 @@ const HALNIP_DB = (function () {
     {
       id: 'insight_002',
       tag: 'INSIGHT',
+      category: 'INNOVATION',
       date: '2026-06-15',
       title: 'イノベーション・エコシステムの設計と構築',
       titleEn: 'Building Innovation Ecosystems: Beyond Corporate R&D',
@@ -38,6 +40,7 @@ const HALNIP_DB = (function () {
     {
       id: 'insight_001',
       tag: 'INSIGHT',
+      category: 'SMART CITY',
       date: '2026-06-01',
       title: '都市の未来を変えるスマートシティ戦略',
       titleEn: 'The Future of Urban Transformation: Smart City Strategy',

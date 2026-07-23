@@ -72,6 +72,15 @@
                 <option value="INSIGHT">INSIGHT</option>
               </select>
             </div>
+            <div class="editor-group" id="categoryGroup" style="display:none;">
+              <label class="editor-label" for="fCategory">区分</label>
+              <select class="editor-select" id="fCategory" name="category">
+                <option value="">未分類</option>
+                <option value="SMART CITY">SMART CITY</option>
+                <option value="INNOVATION">INNOVATION</option>
+                <option value="CROSS-BORDER">CROSS-BORDER</option>
+              </select>
+            </div>
             <div class="editor-group">
               <label class="editor-label" for="fDate">日付</label>
               <input class="editor-input" type="date" id="fDate" name="date" required />
@@ -280,6 +289,8 @@
       document.getElementById('deleteBtn').style.display   = 'inline-flex';
 
       document.getElementById('fTag').value        = post.tag;
+      document.getElementById('fCategory').value  = post.category || '';
+      document.getElementById('categoryGroup').style.display = post.tag === 'INSIGHT' ? '' : 'none';
       document.getElementById('fDate').value       = post.date;
       document.getElementById('fThumb').value      = post.thumbnail || '';
       document.getElementById('fTitleJa').value    = post.title;
@@ -294,11 +305,12 @@
     }
 
     function clearForm() {
-      ['fTag','fDate','fThumb','fTitleJa','fExcerptJa','fTitleEn','fExcerptEn'].forEach(id => {
+      ['fTag','fCategory','fDate','fThumb','fTitleJa','fExcerptJa','fTitleEn','fExcerptEn'].forEach(id => {
         const el = document.getElementById(id);
         if (el.tagName === 'SELECT') el.selectedIndex = 0;
         else el.value = '';
       });
+      document.getElementById('categoryGroup').style.display = 'none';
       document.getElementById('bodyJa').innerHTML = '';
       document.getElementById('bodyEn').innerHTML = '';
       document.getElementById('fPublished').checked = false;
@@ -312,6 +324,9 @@
       else      { img.src = ''; img.style.display = 'none'; }
     }
     document.getElementById('fThumb').addEventListener('input', e => updateThumbPreview(e.target.value));
+    document.getElementById('fTag').addEventListener('change', function() {
+      document.getElementById('categoryGroup').style.display = this.value === 'INSIGHT' ? '' : 'none';
+    });
 
     // ── Save ──
     document.getElementById('editorForm').addEventListener('submit', e => {
@@ -319,9 +334,11 @@
       const title = document.getElementById('fTitleJa').value.trim();
       if (!title) { showToast('タイトルを入力してください', true); return; }
 
+      const tag = document.getElementById('fTag').value;
       const post = {
         id:        editingId || HALNIP_DB.generateId(),
-        tag:       document.getElementById('fTag').value,
+        tag,
+        category:  tag === 'INSIGHT' ? document.getElementById('fCategory').value : '',
         date:      document.getElementById('fDate').value,
         thumbnail: document.getElementById('fThumb').value.trim(),
         title,
