@@ -28,10 +28,28 @@
   <!-- ===== ADMIN PANEL ===== -->
   <div id="adminPanel" style="display:none;">
 
+    <!-- GitHub Settings Modal -->
+    <div id="ghModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:999; align-items:center; justify-content:center;">
+      <div style="background:#fff; padding:2rem; max-width:440px; width:90%; border-radius:4px; box-shadow:0 8px 32px rgba(0,0,0,0.2);">
+        <p style="font-family:var(--font-display); font-size:0.72rem; letter-spacing:0.2em; color:var(--color-accent); margin:0 0 1rem;">GITHUB 連携設定</p>
+        <p style="font-size:0.82rem; line-height:1.8; color:var(--color-text-muted); margin:0 0 1.2rem;">GitHubのPersonal Access Token（Contents: Read &amp; Write 権限）を入力してください。トークンはこのブラウザにのみ保存されます。</p>
+        <label style="font-size:0.75rem; letter-spacing:0.1em; color:var(--color-primary); display:block; margin-bottom:0.4rem;">Personal Access Token</label>
+        <input type="password" id="ghTokenInput" placeholder="ghp_xxxxxxxxxxxx"
+          style="width:100%; padding:0.55em 0.8em; border:1px solid #d0c8bc; font-family:monospace; font-size:0.85rem; box-sizing:border-box; margin-bottom:0.8rem;" />
+        <p id="ghTokenMsg" style="font-size:0.78rem; min-height:1.2em; margin:0 0 1rem; color:var(--color-accent);"></p>
+        <div style="display:flex; gap:0.6rem;">
+          <button id="ghTokenSaveBtn" class="admin-header__btn admin-header__btn--accent" style="flex:1;">保存</button>
+          <button id="ghModalCloseBtn" class="admin-header__btn" style="flex:1;">閉じる</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Header -->
     <header class="admin-header">
       <span class="admin-header__title">HALNIP · Journal Admin</span>
       <div class="admin-header__actions">
+        <button class="admin-header__btn admin-header__btn--publish" id="publishBtn">🌐 サイトに公開</button>
+        <button class="admin-header__btn" id="ghSettingsBtn">⚙ GitHub設定</button>
         <button class="admin-header__btn admin-header__btn--accent" id="exportBtn">JSON Export</button>
         <button class="admin-header__btn" id="importBtnTrigger">Import</button>
         <input type="file" id="importFile" accept=".json" style="display:none;" />
@@ -220,6 +238,8 @@
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminPanel').style.display  = 'block';
       renderSidebar();
+      // バックグラウンドで最新データを取得してサイドバーを再描画
+      HALNIP_DB.refresh(() => renderSidebar());
     }
     document.getElementById('logoutBtn').addEventListener('click', () => {
       HALNIP_DB.logout();
@@ -484,6 +504,51 @@
       t.className   = 'editor-toast show' + (isError ? ' error' : '');
       setTimeout(() => { t.className = 'editor-toast'; }, 2800);
     }
+
+    // ── GitHub 設定モーダル ──
+    const GH_TOKEN_KEY = 'halnip_gh_token';
+
+    document.getElementById('ghSettingsBtn').addEventListener('click', () => {
+      document.getElementById('ghTokenInput').value = localStorage.getItem(GH_TOKEN_KEY) || '';
+      document.getElementById('ghTokenMsg').textContent = '';
+      document.getElementById('ghModal').style.display = 'flex';
+    });
+    document.getElementById('ghModalCloseBtn').addEventListener('click', () => {
+      document.getElementById('ghModal').style.display = 'none';
+    });
+    document.getElementById('ghModal').addEventListener('click', e => {
+      if (e.target === document.getElementById('ghModal'))
+        document.getElementById('ghModal').style.display = 'none';
+    });
+    document.getElementById('ghTokenSaveBtn').addEventListener('click', () => {
+      const token = document.getElementById('ghTokenInput').value.trim();
+      if (!token) { document.getElementById('ghTokenMsg').textContent = 'トークンを入力してください'; return; }
+      localStorage.setItem(GH_TOKEN_KEY, token);
+      document.getElementById('ghTokenMsg').textContent = '✓ 保存しました';
+      setTimeout(() => { document.getElementById('ghModal').style.display = 'none'; }, 800);
+    });
+
+    // ── サイトに公開 ──
+    document.getElementById('publishBtn').addEventListener('click', async () => {
+      const token = localStorage.getItem(GH_TOKEN_KEY);
+      if (!token) {
+        showToast('⚙ GitHub設定でトークンを先に設定してください', true);
+        document.getElementById('ghModal').style.display = 'flex';
+        return;
+      }
+      const btn = document.getElementById('publishBtn');
+      btn.textContent = '公開中…';
+      btn.disabled = true;
+      try {
+        await HALNIP_DB.publishToGitHub(token);
+        showToast('✓ 公開しました — 約1分後に全デバイスで反映されます');
+      } catch (e) {
+        showToast('公開エラー: ' + e.message, true);
+      } finally {
+        btn.textContent = '🌐 サイトに公開';
+        btn.disabled = false;
+      }
+    });
 
   })();
   </script>

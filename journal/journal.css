@@ -292,6 +292,9 @@
 .admin-header__btn:hover { background: rgba(255,255,255,0.1); color: var(--color-white); }
 .admin-header__btn--accent { border-color: var(--color-accent); color: var(--color-accent); }
 .admin-header__btn--accent:hover { background: var(--color-accent); color: var(--color-white); }
+.admin-header__btn--publish { border-color: #2e7d5e; color: #2e7d5e; font-weight: 600; }
+.admin-header__btn--publish:hover { background: #2e7d5e; color: #fff; }
+.admin-header__btn--publish:disabled { opacity: 0.5; cursor: wait; }
 
 /* Sidebar */
 .admin-sidebar {
