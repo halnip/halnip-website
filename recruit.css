@@ -1,0 +1,214 @@
+/* =============================================
+   recruit.css — 採用情報ページ専用スタイル
+   style.css の変数・共通クラスを継承
+   ============================================= */
+
+.subpage .nav {
+  background: rgba(18, 44, 30, 0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 24px rgba(0,0,0,0.18);
+}
+
+/* ─── PAGE HERO ──────────────────────────────── */
+.page-hero {
+  padding: calc(var(--nav-height) + clamp(1.5rem, 3vw, 2.5rem)) 0 clamp(1.5rem, 3vw, 2.5rem);
+  background: var(--color-primary);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  right: -160px; top: -160px;
+  width: 560px; height: 560px;
+  border-radius: 50%;
+  border: 1px solid rgba(181,150,90,0.18);
+  pointer-events: none;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  border: 1px solid rgba(181,150,90,0.12);
+  pointer-events: none;
+}
+.page-hero__inner  { position: relative; z-index: 1; }
+.page-hero__label  { color: var(--color-accent-light); margin-bottom: 0.6rem; font-size: 0.7rem; letter-spacing: 0.3em; }
+.page-hero__title  { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 300; letter-spacing: 0.1em; color: var(--color-white); line-height: 1.2; }
+.page-hero__line   { position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: linear-gradient(to right, var(--color-accent) 0%, transparent 60%); }
+
+/* ─── INTRO ──────────────────────────────────── */
+.recruit-intro {
+  padding: var(--section-pad) 0;
+  background: var(--color-white);
+}
+.recruit-intro__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: clamp(2rem, 4vw, 3rem);
+}
+.recruit-intro__top {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+}
+.recruit-intro__en {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.recruit-intro__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+}
+.recruit-intro__text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.88rem, 1.15vw, 0.96rem);
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--color-text-muted);
+}
+
+/* ─── JOB LISTINGS ───────────────────────────── */
+.recruit-jobs {
+  padding: var(--section-pad) 0;
+  background: var(--color-bg-section);
+}
+.recruit-jobs__label {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+/* Job Card */
+.job-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: clamp(2rem, 4vw, 3.5rem);
+}
+.job-card__head {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin-bottom: clamp(1.8rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.4rem, 2.5vw, 2rem);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+.job-card__type {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  background: var(--color-accent);
+  padding: 0.3em 0.9em;
+  white-space: nowrap;
+}
+.job-card__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+
+/* Job Table */
+.job-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.job-table tr {
+  border-bottom: 1px solid var(--color-border);
+}
+.job-table tr:last-child { border-bottom: none; }
+.job-table th,
+.job-table td {
+  padding: clamp(1rem, 2vw, 1.4rem) clamp(0.8rem, 1.5vw, 1.2rem);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.9;
+}
+.job-table th {
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 1vw, 0.82rem);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  white-space: nowrap;
+  width: 200px;
+  font-weight: 400;
+}
+.job-table td {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-weight: 300;
+  color: var(--color-text);
+}
+
+/* ─── APPLY CTA ──────────────────────────────── */
+.recruit-cta {
+  padding: var(--section-pad) 0;
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
+}
+.recruit-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+.recruit-cta__lead {
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--color-primary);
+  line-height: 1.6;
+}
+.recruit-cta__note {
+  font-family: var(--font-sans);
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  margin-bottom: 0.5rem;
+}
+
+/* ─── BACK LINK ──────────────────────────────── */
+.page-back {
+  padding: clamp(3rem, 5vw, 5rem) 0;
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
+}
+
+/* ─── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 760px) {
+  .recruit-intro__top { flex-direction: column; gap: 0.4rem; }
+  .job-table th { width: 110px; font-size: 0.68rem; }
+  .job-table th,
+  .job-table td { padding: 0.9rem 0.6rem; }
+}
+@media (max-width: 480px) {
+  .job-table tr,
+  .job-table th,
+  .job-table td { display: block; }
+  .job-table th {
+    width: 100%;
+    padding-bottom: 0.2rem;
+    border-bottom: none;
+  }
+  .job-table td { padding-top: 0; }
+}
