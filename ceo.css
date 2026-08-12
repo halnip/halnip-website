@@ -1,0 +1,148 @@
+/* ─── CEO PAGE ──────────────────────────────── */
+.ceo-section {
+  padding: 5rem 0 6rem;
+  background: var(--color-white);
+}
+
+.ceo-section__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  max-width: 760px;
+}
+
+/* Photo + Name card */
+.ceo-card {
+  display: flex;
+  align-items: flex-end;
+  gap: 3rem;
+}
+
+.ceo-card__photo-wrap {
+  flex-shrink: 0;
+}
+
+.ceo-card__photo {
+  width: 180px;
+  height: 230px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.ceo-card__info {
+  padding-bottom: 0.5rem;
+}
+
+.ceo-card__role {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  margin-bottom: 0.6rem;
+}
+
+.ceo-card__name {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 600;
+  color: var(--color-primary);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+
+.ceo-card__name-en {
+  font-family: var(--font-hero);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  font-weight: 300;
+  color: var(--color-text-muted);
+}
+
+/* Bio */
+.ceo-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.ceo-bio__text {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 2.1;
+  color: var(--color-text);
+}
+
+/* Tags */
+.ceo-tags {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.5rem;
+}
+
+.ceo-tags__group {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.ceo-tags__label-wrap {
+  flex-shrink: 0;
+}
+
+.ceo-tags__label {
+  display: block;
+  writing-mode: vertical-rl;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--color-white);
+  background: var(--color-primary);
+  padding: 0.6em 0.45em;
+  font-family: var(--font-sans);
+}
+
+.ceo-tags__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ceo-tags__list li {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  padding-left: 1.2em;
+  position: relative;
+}
+
+.ceo-tags__list li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+}
+
+/* Reveal animation (same as site-wide) */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.revealed { opacity: 1; transform: none; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .ceo-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .ceo-card__photo {
+    width: 140px;
+    height: 178px;
+  }
+}
