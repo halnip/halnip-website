@@ -32,8 +32,8 @@
     <ul class="nav__links" id="navLinks">
       <li><a href="#home" data-en="HOME" data-ja="HOME">HOME</a></li>
       <li><a href="#about" data-en="ABOUT" data-ja="ABOUT">ABOUT</a></li>
-      <li><a href="#consulting">CONSULTING</a></li>
       <li><a href="#brand" data-en="OUR BRAND" data-ja="OUR BRAND">OUR BRAND</a></li>
+      <li><a href="#consulting">CONSULTING</a></li>
       <li><a href="#journal">RELEASE &amp; JOURNAL</a></li>
       <li><a href="#contact" data-en="CONTACT" data-ja="CONTACT">CONTACT</a></li>
       <li><a href="recruit.html" data-en="RECRUIT" data-ja="RECRUIT">RECRUIT</a></li>
@@ -123,6 +123,63 @@
     <div class="about__deco"></div>
   </section>
 
+  <!-- ========== OUR BRAND SECTION ========== -->
+  <section class="brand" id="brand">
+    <div class="brand__inner container">
+      <div class="brand__label section-label">OUR BRAND</div>
+
+      <div class="brand__hero">
+        <!-- SENSETIER Logo — images/sensetier_logo_header-01.png (from Git) -->
+        <div class="brand__logo-wrap">
+          <img
+            src="https://raw.githubusercontent.com/halnip/halnip-website/main/images/sensetier_logo%20-%201280_720.svg"
+            alt="SENSETIER ロゴ"
+            class="brand__logo-img"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <div class="brand__logo-fallback" style="display:none;">SENSETIER</div>
+        </div>
+        <p class="brand__tagline" data-en="Take ownership of your mood. A new ritual to overcome emotional waves and 'tune' yourself." data-ja="自分の機嫌は自分でとる。感情の波を克服し、自身を「調律」する新習慣。">
+          自分の機嫌は自分でとる。<br>感情の波を克服し、自身を「調律」する新習慣。
+        </p>
+        <div class="brand__cta-group">
+          <a href="brandconcept.html" class="btn btn--brand-story">BRAND STORY</a>
+          <a href="https://sensetier.com" target="_blank" rel="noopener" class="btn btn--brand-shop">SENSETIER ONLINE SHOP</a>
+        </div>
+      </div>
+
+      <!-- Product Gallery — carousel on mobile, grid on desktop -->
+      <div class="brand__gallery">
+        <div class="brand__gallery-track" id="galleryTrack">
+          <div class="brand__gallery-item">
+            <!-- Replace with images/DAWN.jpg -->
+            <img src="images/DAWN.jpg" alt="DAWN" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'" />
+            <!-- TODO: Replace href with DAWN landing page URL -->
+            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">DAWN</a>
+          </div>
+          <div class="brand__gallery-item">
+            <!-- Replace with images/BREEZE.jpg -->
+            <img src="images/BREEZE.jpg" alt="BREEZE" onerror="this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800&q=80'" />
+            <!-- TODO: Replace href with BREEZE landing page URL -->
+            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">BREEZE</a>
+          </div>
+          <div class="brand__gallery-item">
+            <!-- Replace with images/SILENCE.jpg -->
+            <img src="images/SILENCE.jpg" alt="SILENCE" onerror="this.src='https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80'" />
+            <!-- TODO: Replace href with SILENCE landing page URL -->
+            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">SILENCE</a>
+          </div>
+        </div>
+        <!-- Carousel dots (mobile) -->
+        <div class="brand__gallery-dots" id="galleryDots">
+          <button class="dot active" data-idx="0"></button>
+          <button class="dot" data-idx="1"></button>
+          <button class="dot" data-idx="2"></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== CONSULTING SECTION ========== -->
   <section class="consulting" id="consulting">
     <div class="consulting__inner container">
@@ -180,63 +237,6 @@
         <p class="consulting__pdf-link">
           <a href="202607_%E4%BC%9A%E7%A4%BE%E7%B4%B9%E4%BB%8B%E8%B3%87%E6%96%99%20HP%E6%8E%B2%E8%BC%89%E7%94%A8.pdf" target="_blank" rel="noopener" data-en="Open Document →" data-ja="会社紹介資料を開く →">会社紹介資料を開く →</a>
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== OUR BRAND SECTION ========== -->
-  <section class="brand" id="brand">
-    <div class="brand__inner container">
-      <div class="brand__label section-label">OUR BRAND</div>
-
-      <div class="brand__hero">
-        <!-- SENSETIER Logo — images/sensetier_logo_header-01.png (from Git) -->
-        <div class="brand__logo-wrap">
-          <img
-            src="https://raw.githubusercontent.com/halnip/halnip-website/main/images/sensetier_logo%20-%201280_720.svg"
-            alt="SENSETIER ロゴ"
-            class="brand__logo-img"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-          />
-          <div class="brand__logo-fallback" style="display:none;">SENSETIER</div>
-        </div>
-        <p class="brand__tagline" data-en="Take ownership of your mood. A new ritual to overcome emotional waves and 'tune' yourself." data-ja="自分の機嫌は自分でとる。感情の波を克服し、自身を「調律」する新習慣。">
-          自分の機嫌は自分でとる。<br>感情の波を克服し、自身を「調律」する新習慣。
-        </p>
-        <div class="brand__cta-group">
-          <a href="brandconcept.html" class="btn btn--brand-story">BRAND STORY</a>
-          <a href="https://sensetier.com" target="_blank" rel="noopener" class="btn btn--brand-shop">SENSETIER ONLINE SHOP</a>
-        </div>
-      </div>
-
-      <!-- Product Gallery — carousel on mobile, grid on desktop -->
-      <div class="brand__gallery">
-        <div class="brand__gallery-track" id="galleryTrack">
-          <div class="brand__gallery-item">
-            <!-- Replace with images/DAWN.jpg -->
-            <img src="images/DAWN.jpg" alt="DAWN" onerror="this.src='https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80'" />
-            <!-- TODO: Replace href with DAWN landing page URL -->
-            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">DAWN</a>
-          </div>
-          <div class="brand__gallery-item">
-            <!-- Replace with images/BREEZE.jpg -->
-            <img src="images/BREEZE.jpg" alt="BREEZE" onerror="this.src='https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=800&q=80'" />
-            <!-- TODO: Replace href with BREEZE landing page URL -->
-            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">BREEZE</a>
-          </div>
-          <div class="brand__gallery-item">
-            <!-- Replace with images/SILENCE.jpg -->
-            <img src="images/SILENCE.jpg" alt="SILENCE" onerror="this.src='https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80'" />
-            <!-- TODO: Replace href with SILENCE landing page URL -->
-            <a href="#" class="brand__gallery-btn" target="_blank" rel="noopener">SILENCE</a>
-          </div>
-        </div>
-        <!-- Carousel dots (mobile) -->
-        <div class="brand__gallery-dots" id="galleryDots">
-          <button class="dot active" data-idx="0"></button>
-          <button class="dot" data-idx="1"></button>
-          <button class="dot" data-idx="2"></button>
-        </div>
       </div>
     </div>
   </section>
