@@ -234,6 +234,9 @@
 
     // ── Init ──
     render();
+
+    // posts.json から新しいデータが届いたら自動で再描画
+    window.addEventListener('halnip:posts-updated', () => render());
   })();
   </script>
 

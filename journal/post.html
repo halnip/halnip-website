@@ -157,6 +157,14 @@
     const navLinks  = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => { hamburger.classList.toggle('open'); navLinks.classList.toggle('open'); });
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hamburger.classList.remove('open'); navLinks.classList.remove('open'); }));
+
+    // posts.json から新しいデータが届いたらページを再読込（最新コンテンツを確実に反映）
+    let _postsUpdatedFired = false;
+    window.addEventListener('halnip:posts-updated', () => {
+      if (_postsUpdatedFired) return;
+      _postsUpdatedFired = true;
+      location.reload();
+    });
   })();
   </script>
 

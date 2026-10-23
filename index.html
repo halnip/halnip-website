@@ -489,6 +489,7 @@
   // TOP JOURNAL — 最新3件を動的生成
   // =============================================
   (function() {
+    function renderTopJournal() {
     const grid = document.getElementById('topJournalGrid');
     if (!grid || typeof HALNIP_DB === 'undefined') return;
 
@@ -520,12 +521,16 @@
           </a>
         </article>`;
     }).join('');
+    }
+    renderTopJournal();
+    window.addEventListener('halnip:posts-updated', renderTopJournal);
   })();
 
   // =============================================
   // CONSULTING INSIGHTS — INSIGHT タグ最新3件を動的生成
   // =============================================
   (function() {
+    function renderInsights() {
     const grid = document.getElementById('insightsGrid');
     if (!grid || typeof HALNIP_DB === 'undefined') return;
 
@@ -550,6 +555,9 @@
           </a>
         </article>`;
     }).join('');
+    }
+    renderInsights();
+    window.addEventListener('halnip:posts-updated', renderInsights);
   })();
 
   // =============================================

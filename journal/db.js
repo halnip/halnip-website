@@ -110,7 +110,16 @@ const HALNIP_DB = (function () {
   function _fetchRemote() {
     return fetch(POSTS_URL + '?_=' + Date.now(), { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error('no-remote'); return r.json(); })
-      .then(data => { if (Array.isArray(data) && data.length) _save(data); });
+      .then(data => {
+        if (Array.isArray(data) && data.length) {
+          const before = localStorage.getItem(KEY);
+          const after  = JSON.stringify(data);
+          _save(data);
+          if (before !== after) {
+            try { window.dispatchEvent(new CustomEvent('halnip:posts-updated')); } catch {}
+          }
+        }
+      });
   }
 
   /* ── ページロード時にバックグラウンドで同期（公開ページ用） ── */
