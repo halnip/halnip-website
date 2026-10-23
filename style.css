@@ -185,18 +185,25 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   box-shadow: 0 1px 24px rgba(0,0,0,0.18);
 }
 
+.nav__logo {
+  flex-shrink: 0;
+}
 .nav__logo-link {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   transition: opacity var(--transition-fast);
 }
 .nav__logo-link:hover { opacity: 0.8; }
 
-/* Logo image — height fixed, width auto */
+/* Logo image — 縦横比を厳密に保持 */
 .nav__logo-img {
-  height: 48px;
+  height: 52px;
   width: auto;
+  max-width: none;
   display: block;
+  flex-shrink: 0;
+  object-fit: contain;
   margin-right: clamp(2rem, 5vw, 4.5rem);
 }
 
@@ -1606,11 +1613,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .footer__logo-img {
-  height: 44px;
+  height: 56px;
   width: auto;
+  max-width: none;
   display: block;
-  /* Green logo on dark bg — brighten slightly if needed */
-  filter: brightness(1.1);
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 .footer__logo-text-fallback {
