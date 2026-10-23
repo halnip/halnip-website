@@ -1434,7 +1434,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   object-fit: cover;
   transition: transform 0.65s var(--transition-slow);
 }
+.journal__card-img--contain {
+  object-fit: contain !important;
+  background: var(--color-primary-dark);
+  padding: 1.2rem 1.4rem;
+}
 .journal__card:hover .journal__card-img { transform: scale(1.06); }
+.journal__card:hover .journal__card-img--contain { transform: scale(1.03); }
 
 .journal__card-tag {
   position: absolute;

@@ -580,7 +580,7 @@
         <article class="journal__card reveal">
           <a href="journal/post.html?id=${post.id}" class="journal__card-link">
             <div class="journal__card-img-wrap">
-              <img src="${post.thumbnail}" alt="${post.title}" class="journal__card-img"
+              <img src="${post.thumbnail}" alt="${post.title}" class="journal__card-img${/logo/i.test(post.thumbnail || '') ? ' journal__card-img--contain' : ''}"
                 onerror="this.src='https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=600&q=80'" loading="lazy" />
               <span class="journal__card-tag"
                 data-ja="${post.tag === 'RELEASE' ? 'リリース' : 'ジャーナル'}"

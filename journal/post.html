@@ -121,8 +121,10 @@
         document.getElementById('postDate').textContent  = post.date.replace(/-/g, '.');
         document.getElementById('postDate').setAttribute('datetime', post.date);
         document.getElementById('postTitle').textContent = title;
-        document.getElementById('postThumb').src         = post.thumbnail;
-        document.getElementById('postThumb').alt         = title;
+        const thumbEl = document.getElementById('postThumb');
+        thumbEl.src = post.thumbnail;
+        thumbEl.alt = title;
+        thumbEl.classList.toggle('post-hero__thumb--contain', /logo/i.test(post.thumbnail || ''));
         document.getElementById('postBody').innerHTML    = body;
       }
       renderPost(currentLang);
