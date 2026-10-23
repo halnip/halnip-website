@@ -198,13 +198,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* Logo image — 縦横比を厳密に保持 */
 .nav__logo-img {
-  height: 52px;
+  height: clamp(36px, 5.5vh, 48px);
+  max-height: calc(var(--nav-height) - 20px);
   width: auto;
-  max-width: none;
+  max-width: 42vw;
   display: block;
   flex-shrink: 0;
   object-fit: contain;
-  margin-right: clamp(2rem, 5vw, 4.5rem);
+  margin-right: clamp(1.2rem, 3vw, 2.4rem);
 }
 
 /* Text fallback (if image fails to load) */
@@ -394,11 +395,15 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .hero__logo-text {
   font-family: var(--font-hero);
-  font-size: clamp(4rem, 12vw, 9.5rem);
+  font-size: clamp(3rem, 10vw, 8rem);
   font-weight: 400;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.18em;
   color: var(--color-white);
   line-height: 1;
+  white-space: nowrap;
+  max-width: 92vw;
+  padding: 0 0.3em;
+  overflow-wrap: normal;
 }
 .hero__tagline {
   font-family: var(--font-hero);
