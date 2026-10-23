@@ -109,6 +109,18 @@
     </div>
   </section>
 
+  <!-- ========== LATEST RELEASE TICKER ========== -->
+  <section class="latest-ticker" id="latestTicker">
+    <div class="latest-ticker__inner container">
+      <div class="latest-ticker__label">
+        <span class="latest-ticker__pulse" aria-hidden="true"></span>
+        <span class="latest-ticker__kicker">LATEST</span>
+      </div>
+      <div class="latest-ticker__slides" id="tickerSlides" aria-live="polite"></div>
+      <div class="latest-ticker__dots" id="tickerDots"></div>
+    </div>
+  </section>
+
   <!-- ========== ABOUT SECTION ========== -->
   <section class="about" id="about">
     <div class="about__inner container">
@@ -485,6 +497,71 @@
   <script src="main.js"></script>
   <script src="cursor.js"></script>
   <script>
+  // =============================================
+  // LATEST RELEASE TICKER — ヒーロー直下の自動カルーセル
+  // =============================================
+  (function() {
+    if (typeof HALNIP_DB === 'undefined') return;
+    const slidesEl = document.getElementById('tickerSlides');
+    const dotsEl   = document.getElementById('tickerDots');
+    if (!slidesEl || !dotsEl) return;
+
+    let autoTimer = null;
+    let currentIdx = 0;
+    let slides = [], dots = [];
+
+    function render() {
+      const posts = HALNIP_DB.getPublishedPosts()
+        .filter(p => p.tag === 'RELEASE')
+        .slice(0, 3);
+      if (posts.length === 0) {
+        document.getElementById('latestTicker').style.display = 'none';
+        return;
+      }
+      document.getElementById('latestTicker').style.display = '';
+
+      slidesEl.innerHTML = posts.map((p, i) => {
+        const d = p.date.replace(/-/g, '.');
+        return `<a href="journal/post.html?id=${p.id}" class="latest-ticker__slide${i === 0 ? ' active' : ''}" data-idx="${i}">
+          <span class="latest-ticker__slide-tag">RELEASE</span>
+          <span class="latest-ticker__slide-date">${d}</span>
+          <span class="latest-ticker__slide-title">${p.title}</span>
+        </a>`;
+      }).join('');
+
+      dotsEl.innerHTML = posts.map((_, i) =>
+        `<button class="latest-ticker__dot${i === 0 ? ' active' : ''}" data-idx="${i}" aria-label="Slide ${i+1}"></button>`
+      ).join('');
+
+      slides = slidesEl.querySelectorAll('.latest-ticker__slide');
+      dots   = dotsEl.querySelectorAll('.latest-ticker__dot');
+      currentIdx = 0;
+
+      dots.forEach(d => d.addEventListener('click', () => {
+        go(+d.dataset.idx);
+        resetAuto();
+      }));
+
+      resetAuto();
+    }
+
+    function go(i) {
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+      if (slides[i]) slides[i].classList.add('active');
+      if (dots[i])   dots[i].classList.add('active');
+      currentIdx = i;
+    }
+    function resetAuto() {
+      clearInterval(autoTimer);
+      if (slides.length <= 1) return;
+      autoTimer = setInterval(() => go((currentIdx + 1) % slides.length), 5000);
+    }
+
+    render();
+    window.addEventListener('halnip:posts-updated', render);
+  })();
+
   // =============================================
   // TOP JOURNAL — 最新3件を動的生成
   // =============================================
